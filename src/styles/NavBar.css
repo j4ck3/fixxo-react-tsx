@@ -1,0 +1,158 @@
+.meny .meny-container .meny-body ul, li, .meny .meny-container .meny-body .meny-logo h1, 
+.meny .meny-container .meny-body{
+    margin: 0;
+    padding: 0;
+}
+
+.meny{
+    height: 10vh;
+    display: flex;
+    align-items: center;
+    background: rgb(230,230,230);
+    background: linear-gradient(90deg, rgba(230,230,230,1) 0%, rgba(244,244,244,1) 100%);
+}
+
+.meny .meny-container .meny-body{
+    display: flex;
+    justify-content: space-between;
+}
+
+
+.meny .meny-container .meny-body .meny-logo h1{
+    display: flex;
+    align-items: center;
+    pointer-events: none;
+    font-size: var(--font-size-35);
+    font-weight: var(--font-weight-bold);
+    -webkit-user-select: none;
+    user-select: none;
+    margin: auto;
+}
+
+    .meny .meny-container .meny-body .meny-link-body, .meny-button{
+        list-style: none;
+        display: none;
+        align-items: center;
+        gap: 2rem;
+    }
+
+    .meny .meny-container .meny-body .meny-link-body li a{
+        text-decoration: none;
+        color: var(--color-theme-dark);
+        font-weight: var(--font-weight-regular);
+        transition: all .2s;
+    }
+
+    .meny .meny-container .meny-body .meny-link-body li .active{
+        color: var(--color-theme);
+        font-weight: var(--font-weight-regular);
+        transition: all .2s;
+    }
+
+    .meny .meny-container .meny-body .meny-link-body li a:hover{
+        color: var(--color-theme);
+    }
+
+
+
+    .meny .meny-container .meny-body .meny-button li {
+        background-color: white;
+        border-radius: 50px;
+        box-shadow: 0px 0px 13px 1px rgba(0,0,0,0.4);
+        
+    }
+
+    .meny .meny-container .meny-body .meny-button a i{
+        color: black;
+        padding: 10px;
+    }
+
+        .meny .meny-container .meny-body .meny-button #counter-1{
+            color: white;
+            position: absolute;
+            right: -7px;
+            top: -15px;
+            padding: 0px 7px;
+            border-radius: 50px;
+            background-color: var(--color-theme);
+        }
+
+        .meny .meny-container .meny-body .meny-button #counter-2{
+            color: white;
+            position: absolute;
+            right: -7px;
+            top: -15px;
+            padding: 0px 7px;
+            border-radius: 50px;
+            background-color: var(--color-theme);
+        }
+
+        .meny-btn {
+            display: none;
+        }
+        
+
+
+        @media screen and (min-width: 768px) {
+            .meny-link-body{
+                display: flex!important;
+            }
+        }
+        
+        @media screen and (max-width: 768px){
+
+    
+        
+            .meny-button {
+                gap: 0.8rem;
+            }
+        
+            .meny-link-body{
+                position: absolute;
+                right: 0;
+                top: 10vh;
+                display: flex;
+                flex-direction: column;
+                align-items: center;
+                background-color: var(--color-theme);
+                width: 50%;
+                height: 70vh;
+                z-index: 2;
+                border-radius: 25px 0 0 25px;
+            }
+                .meny-link-body li{
+                    margin-bottom: 20px;
+                }
+        
+                    .meny-link-body li:first-child{
+                        margin-top: 3rem;
+                    }
+        
+                    .meny-link-body li a{
+                        font-size: 18px;
+                        color: white!important;
+                    }
+        
+                        .meny-link-body li:hover a{
+                            color: #a84949!important;
+                        }
+        
+        
+        
+            .meny-btn {
+                cursor: pointer;
+                display: flex;
+                justify-content: center;
+                align-items: center;
+                width: 42px;
+                background-color: var(--color-theme);
+                border-radius: 50px;
+                margin-right: 1rem;
+            }
+        
+                .meny-btn i{
+                    color: white !important;
+                    cursor: pointer;
+                    font-size: 20px;;
+                }
+            }

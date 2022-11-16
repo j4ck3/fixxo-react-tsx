@@ -1,0 +1,26 @@
+.footer {
+    height: 110px;
+    background-color: #f8f8f8;
+    border-color: #BCBCBD;
+    border-style: solid;
+    border-width: 1px 0 1px 0;
+}
+
+    .footer-body {
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        align-items: center;
+        height: 100%;
+    }
+
+
+    .footer-socials{ 
+        display: flex;
+        margin-bottom: 1rem;
+        gap: 1.5rem;
+    }
+
+        .footer-socials i {
+            font-size: 22px;
+        }

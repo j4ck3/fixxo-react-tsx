@@ -1,0 +1,148 @@
+@import url('https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700;800&display=swap');
+
+:root{
+    --font-Poppins: 'Poppins', sans-serif;
+    
+    --font-weight-regular: 500;
+    --font-weight-semi-bold: 600;
+    --font-weight-bold: 700;
+    --font-weight-extra-b: 800;
+
+    --color-gray-0: #ededed;
+    --color-gray-1: #f5f5f5;
+    --color-gray-3: #cdced0;
+    --color-gray-4: #d9d9d9;
+    --color-gray-5: #bbbbbb;
+    --color-theme: #ff7373;
+    --color-theme-dark: #222529;
+
+
+    --font-size-16: 16px;
+    --font-size-35: 35px;
+    --font-size-65: 65px;
+}
+
+html, body{
+    box-sizing: border-box;
+    overflow-x: hidden;
+    font-family: var(--font-Poppins);
+}
+
+.btn{
+    position: relative;
+    display: block;
+    text-transform: uppercase;
+    text-decoration: none;
+    width: 150px;
+    font-weight: 500;
+    font-size: 16px;
+    color: white!important;
+    background-color: var(--color-theme);
+    margin-top: 2.5em;
+    padding: 10px 10px;
+    text-align: center;
+    transition: all .2s;
+    margin: 3rem auto;
+    z-index: 0;
+    border-radius: 0!important;
+}
+
+.btn:before{
+    position: absolute;
+    top: 5px;
+    left: 7px;
+    content: '';
+    width: calc(100% + -14px);
+    height: calc(100% - 10px);
+    border: 2px solid white;
+    clip-path: polygon(100% 42%, 82% 100%, 100% 100%);
+    transition: all .3s ease-out;
+}
+
+.btn:after{
+    position: absolute;
+    top: 5px;
+    left: 7px;
+    content: '';
+    width: calc(100% + -14px);
+    height: calc(100% - 10px);
+    border: 2px solid white;
+    clip-path: polygon(16% 0, 0 54%, 0 0);
+    transition: all .3s ease-out;
+}
+
+.btn:hover:after {
+    border-color: var(--color-theme);
+    clip-path: polygon(100% 0, 0 100%, 0 0);
+}
+
+.btn:hover:before {
+    border-color: var(--color-theme);
+    clip-path: polygon(100% 0, 0% 100%, 100% 100%);
+}
+
+    .btn:hover{
+        color: var(--color-theme)!important;
+        background-color: var(--color-theme-dark)!important;
+    }
+
+.btn-dark{
+    position: relative;
+    display: block;
+    font-family: var(--font-Poppins);
+    text-transform: uppercase;
+    text-decoration: none;
+    width: 150px;
+    font-weight: 500;
+    font-size: 18px;
+    color: white;
+    background-color: #23262A;
+    margin-top: 2.5em;
+    padding: 10px 10px;
+    text-align: center;
+    transition: all .2s;
+    border-radius: 0!important;
+}
+    .btn-dark:hover{
+        color: var(--color-theme-dark)!important;
+        background-color: var(--color-theme)
+    }
+
+    .btn-dark::after {
+        position: absolute;
+        top: 5px;
+        left: 7px;
+        content: '';
+        width: calc(100% + -14px);
+        height: calc(100% - 10px);
+        border: 2px solid white;
+        clip-path: polygon(100% 42%, 82% 100%, 100% 100%);
+        transition: all .3s ease-out;
+    }
+
+    .btn-dark::before {
+        position: absolute;
+        top: 5px;
+        left: 7px;
+        content: '';
+        width: calc(100% + -14px);
+        height: calc(100% - 10px);
+        border: 2px solid white;
+        clip-path: polygon(16% 0, 0 54%, 0 0);
+        transition: all .3s ease-out;
+    }
+
+        .btn-dark:hover::before {
+            border-color: var(--color-theme);
+            clip-path: polygon(100% 0, 0 100%, 0 0);
+        }
+
+        .btn-dark:hover::after {
+            border-color: var(--color-theme);
+            clip-path: polygon(100% 0, 0% 100%, 100% 100%);
+        }
+
+.white {
+    background-color: white;
+    color: black
+}

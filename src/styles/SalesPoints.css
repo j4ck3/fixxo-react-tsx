@@ -1,0 +1,48 @@
+
+.sales-point-container {
+    display: flex;
+    justify-items: center;
+    gap: 2rem;
+    margin: 3rem 0;
+    border-top: 1px solid var(--color-gray-5);
+}
+
+.sales-point-body {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+}
+
+    .sales-point-body h2 {
+        font-family: var(--font-Poppins);
+        font-weight: var(--font-weight-bold);
+        font-size: 20px;
+        margin: 1rem 0;
+        text-align: center;
+    }
+    .sales-point-body span {
+        font-family: var(--font-Poppins);
+        font-weight: var(--font-weight-regular);
+        font-size: 16px;
+        color: #616365;
+        text-align: center;
+    }
+
+        .sales-point-body i {
+            background-color: white;
+            box-shadow: 0px 0px 13px 1px rgba(0,0,0,0.4);
+            padding: 16px;
+            border-radius: 50px;
+            font-size: 20px;
+            margin-top: 4rem;
+        }
+
+
+
+
+@media screen and (max-width: 768px){
+    .sales-point-container {
+        flex-direction: column;
+    }
+}

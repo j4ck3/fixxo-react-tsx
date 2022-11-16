@@ -1,0 +1,134 @@
+.featured-body{
+    background-color: var(--color-gray-1);
+    height: 210px;
+    position: relative;
+    cursor: pointer;
+    overflow: hidden;
+    transition: all .2s;
+}
+
+.featured-body:hover{
+    background-color: rgba(26, 26, 26, 0.178);
+}
+
+
+.featured-title {
+    font-size: 1.5rem;
+    font-weight: bold;
+    text-align: center;
+    margin: 1rem;
+}
+
+.arrivals-menu{
+    list-style: none;
+    z-index: 2;
+    position: absolute;
+    right: -39px;
+    top: 5%;
+    border-radius: 50px;
+    transition: all .2s ease-in-out;
+}
+
+.featured-body .model-item-img {
+    width: 100%;
+    object-fit: cover;
+}
+
+.featured-body:hover .arrivals-menu{
+    right: 12px;
+}
+
+.category-grid-body:hover .arrivals-menu{
+    right: 12px;
+}
+
+.featured-body .arrivals-menu li, .category-grid-body .arrivals-menu li{   
+    background-color: rgb(255, 255, 255);
+    border-radius: 50px;
+    box-shadow: 0px 0px 4px 3px rgb(0 0 0 / 34%);
+    padding: 3px 9px;
+    margin-bottom: 1rem;
+}
+
+.featured-body .arrivals-menu li button, .category-grid-body .arrivals-menu li button{
+    color: black;
+    font-size: 12px;
+    border: none;
+    background-color: transparent;
+    padding: 0;
+}   
+
+    .arrivals-menu li:hover{
+        color: white;
+        background-color: #23262A;
+    }
+
+    .arrivals-menu li:hover i{
+        color: white;
+    }
+
+
+.featured-btn{
+    color: white;
+    font-family: var(--font-Poppins);
+    font-weight: var(--font-weight-regular);
+    background-color: var(--color-theme);
+    text-transform: uppercase;
+    text-decoration: none;
+    font-size: 14px;
+
+    width: 100%;
+    padding: .7rem 0;
+    list-style: none;
+    z-index: 5;
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    text-align: center;
+    opacity: 0;
+    transition: all .2s ease-in-out;
+} 
+
+    .featured-body:hover .featured-btn,
+    .category-grid-body:hover .featured-btn
+    {
+        color: white;
+        opacity: 1;
+    }
+
+    .featured-grid-info h4,
+    .sec-grid-info h4{
+        font-size: 13px;
+        font-weight: var(--font-weight-regular);
+        color: #616365;
+        margin: 10px 0;
+    }
+
+    .featured-grid-info h3{
+        font-size: 20px;
+        font-weight: var(--font-weight-semi-bold);
+        color: #23262A;
+        margin-top: 10px;
+    }
+
+    .featured-grid-info p, .sec-grid-info p{
+        font-size: 18px;
+        font-weight: var(--font-weight-semi-bold);
+        color: #23262A;
+        margin-top: 10px;
+    }
+
+        .featured-grid-info i{
+            color: var(--color-theme);
+        }
+
+@media screen and (max-width: 768px) {
+    .featured-btn {
+        opacity: 1;
+    }
+
+    .arrivals-menu {
+        opacity: 1;
+        right: 12px;
+    }
+}
