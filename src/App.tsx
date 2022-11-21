@@ -1,6 +1,6 @@
-import React/* , {useState,useEffect} */ from 'react';
+import React, { useState, useEffect } from 'react';
 import { BrowserRouter, Route, Routes } from 'react-router-dom';
-/* import { ProductsContext } from './contexts/context' */
+import { ProductsContext } from './contexts/context'
 
 import './App.css'
 
@@ -16,7 +16,7 @@ import Contact from './views/Contact'; */
 
 const App: React.FC = () => {
 
-/*   const [products, setProducts] = useState ({
+  const [products, setProducts] = useState ({
     allProducts: [],
     featuredProducts: []
   })
@@ -34,11 +34,11 @@ const App: React.FC = () => {
     }
     fetchFeaturedProducts()
 
-  }, [setProducts]) */
+  }, [setProducts])
 
   return (
     <BrowserRouter>
-{/*       <ProductsContext.Provider value={products}> */}
+      <ProductsContext.Provider value={products}>
       <Routes>
         <Route path='/' element={<Home />} />
 {/*         <Route path='/Contact' element={<Contact />} />
@@ -50,7 +50,7 @@ const App: React.FC = () => {
 
         <Route path='*' element={<NotFound />} /> */}
       </Routes>
-{/*       </ProductsContext.Provider> */}
+      </ProductsContext.Provider>
     </BrowserRouter>
   );
 }
