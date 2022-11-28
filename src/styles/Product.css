@@ -130,6 +130,7 @@
 
         .product-size-radio[type=number] { 
             -moz-appearance: textfield;
+            -webkit-appearance: textfield;
             appearance: textfield;
             margin: 0; 
         }

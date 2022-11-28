@@ -6,17 +6,20 @@ import './App.css'
 
 import Home from './views/Home';
 
-/* import NotFound from './views/NotFound';
+import NotFound from './views/NotFound';
 import Categories from './views/Categories';
 import Product from './views/Product';
-import Cart from './views/Cart';
 import Wishlist from './views/Wishlist';
 import Compare from './views/Compare';
-import Contact from './views/Contact'; */
+import Contact from './views/Contact';
+
 
 const App: React.FC = () => {
 
-  const [products, setProducts] = useState ({
+
+
+
+  const [products, setProducts] = useState ({ 
     allProducts: [],
     featuredProducts: []
   })
@@ -40,15 +43,15 @@ const App: React.FC = () => {
     <BrowserRouter>
       <ProductsContext.Provider value={products}>
       <Routes>
-        <Route path='/' element={<Home />} />
-{/*         <Route path='/Contact' element={<Contact />} />
-        <Route path='/Categories' element={<Categories /> } />
-        <Route path='/Product' element={<Product /> } />
-        <Route path='/Cart' element={<Cart /> } />
+        <Route path='/' element={<Home handleClick={function (event: React.MouseEvent<HTMLButtonElement, MouseEvent>): JSX.Element { throw new Error('Function not implemented.')} } />} />
+        <Route path='/Contact' element={<Contact />} />
+        <Route path='/Categories' element={<Categories /> } /> 
+        <Route path='/Product' element={<Product name={undefined} item={undefined} handleClick={function (event: React.MouseEvent<HTMLButtonElement, MouseEvent>): void {
+            throw new Error('Function not implemented.');} } /> } />
         <Route path='/Wishlist' element={<Wishlist /> } />
         <Route path='/Compare' element={<Compare /> } />
 
-        <Route path='*' element={<NotFound />} /> */}
+        <Route path='*' element={<NotFound />} />
       </Routes>
       </ProductsContext.Provider>
     </BrowserRouter>

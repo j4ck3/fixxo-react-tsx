@@ -1,2 +1,4 @@
 import { createContext }  from 'react'
-export const ProductsContext = createContext<string | null>(null)
+
+
+export const ProductsContext: any = createContext([])

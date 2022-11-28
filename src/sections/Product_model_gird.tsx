@@ -4,8 +4,7 @@ import ModelItem from '../components/ModelItem'
 interface Props {
   title: string;
   items: any;
-  handleClick: (event: MouseEvent) => void;
-
+  handleClick: (event: React.MouseEvent<HTMLButtonElement>) => void
 }
 
 

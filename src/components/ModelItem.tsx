@@ -3,7 +3,7 @@ import React from 'react'
 
 interface Props {
     item: any;
-    handleClick: (event: MouseEvent) => void;
+    handleClick: (event: React.MouseEvent<HTMLButtonElement>) => void
 }
 
 
@@ -15,9 +15,9 @@ const model_item:React.FC<Props> = ({item, handleClick}) => {
                 <div className="category-grid-body w-100">
                     <img className='model-item-img' src={item.imageName} alt={item.name} />
                     <ul className='arrivals-menu'>
-                        <li><button><i className="fa-solid fa-heart"></i></button></li>
-                        <li><button><i className="fa-solid fa-shuffle"></i></button></li>
-                        <li><button onClick={() => handleClick(item)} ><i className="fa-solid fa-cart-shopping"></i></button></li>
+                        <li><button title="add to wishlist"><i className="fa-solid fa-heart"></i></button></li>
+                        <li><button title="compare this item"><i className="fa-solid fa-shuffle"></i></button></li>
+                        <li><button title="add to cart" onClick={() => handleClick(item)}><i className="fa-solid fa-cart-shopping"></i></button></li>
                     </ul>
                     <a className="featured-btn" href="#">quick view</a>
                 </div>

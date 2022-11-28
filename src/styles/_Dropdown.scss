@@ -1,0 +1,38 @@
+.dropdown {
+    width: 200px;
+    position: relative;
+    z-index: 4;
+    -webkit-user-select: none;
+    user-select: none;
+    .dropdown-btn {
+       padding: 10px;
+       background-color: #fff;
+       font-weight: 400;
+       color: black;
+       border: 1px solid black;
+       cursor: pointer
+    }
+
+    .dropdown-content {
+        position: absolute;
+        width: 200px;
+        background-color: white;
+        top: 110%;
+        padding: 15px;
+        border: 1px solid black;
+
+        .dropdown-item {
+            padding: 5px;
+            margin-bottom: 5px;
+            width: 100%;
+            transition: .2s;
+            cursor: pointer;
+            &:hover {
+                background-color: gray;
+            }
+        }
+    }
+
+
+
+}
