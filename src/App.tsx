@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import { BrowserRouter, Route, Routes } from 'react-router-dom';
 import { ProductsContext } from './contexts/context'
-
+import UserProvider from './contexts/UserContext'
 import './App.css'
 
 import Home from './views/Home';
@@ -12,6 +12,8 @@ import Product from './views/Product';
 import Wishlist from './views/Wishlist';
 import Compare from './views/Compare';
 import Contact from './views/Contact';
+import Users from './views/Users';
+
 
 
 const App: React.FC = () => {
@@ -41,6 +43,7 @@ const App: React.FC = () => {
 
   return (
     <BrowserRouter>
+    <UserProvider>
       <ProductsContext.Provider value={products}>
       <Routes>
         <Route path='/' element={<Home handleClick={function (event: React.MouseEvent<HTMLButtonElement, MouseEvent>): JSX.Element { throw new Error('Function not implemented.')} } />} />
@@ -48,12 +51,13 @@ const App: React.FC = () => {
         <Route path='/Categories' element={<Categories /> } /> 
         <Route path='/Product' element={<Product name={undefined} item={undefined} handleClick={function (event: React.MouseEvent<HTMLButtonElement, MouseEvent>): void {
             throw new Error('Function not implemented.');} } /> } />
+        <Route path='/Users' element={<Users /> } /> 
         <Route path='/Wishlist' element={<Wishlist /> } />
         <Route path='/Compare' element={<Compare /> } />
-
         <Route path='*' element={<NotFound />} />
       </Routes>
       </ProductsContext.Provider>
+      </UserProvider>
     </BrowserRouter>
   );
 }
