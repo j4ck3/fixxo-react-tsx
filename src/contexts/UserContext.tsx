@@ -1,5 +1,5 @@
 import React, {useState, useContext, createContext} from 'react'
-import { Params } from 'react-router-dom'
+/* import { Params } from 'react-router-dom' */
 import {User, UserRequest} from '../models/UserModels'
 import { UserProviderProps } from '../models/UserProviderPropsModels'
 
@@ -11,7 +11,7 @@ export interface IUserContext {
     setUserRequest: React.Dispatch<React.SetStateAction<UserRequest>>
     users: User[]
     create: (e: React.FormEvent) => void
-    get: (id: Readonly<Params<string>>) => void
+    get: (id: number) => void
     getAll: () => void
     update: (e: React.FormEvent) => void
     remove: (id: number) => void
@@ -44,7 +44,7 @@ const UserProvider = ({children} : UserProviderProps) => {
             setUserRequest(defaultUserRequestValues)    
         }
     }
-    const get = async (id: Readonly<Params<string>>) => {
+    const get = async (id: number) => {
         const result = await fetch(`${baseUrl}/${id}`)
         if (result.status === 200) {
             setUser(await result.json())

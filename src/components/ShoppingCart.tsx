@@ -1,14 +1,11 @@
 import React from 'react'
-import { useShoppingCart } from '../contexts/ShoppingCartContext'
+import { ShoppingCartContextType, useShoppingCartContext } from '../contexts/ShoppingCartContext'
 import ShoppingCartItem from './ShoppingCartItem'
 
-interface Props {
-  cartItems: any[]
-}
+const ShoppingCart:React.FC = () => {
 
-const ShoppingCart:React.FC<Props> = () => {
+  const { items } = useShoppingCartContext() as ShoppingCartContextType
 
-  const {cartItems} = useShoppingCart()
   return (
     <>
       <div className="offcanvas offcanvas-end" tabIndex={-1} id="shoppingCart" aria-labelledby="shoppingCartLabel">
@@ -18,7 +15,7 @@ const ShoppingCart:React.FC<Props> = () => {
         </div>
         <div className="offcanvas-body">
           {
-            cartItems.map((item: { articleNumber: React.Key }) => (<ShoppingCartItem key={item.articleNumber} item={item} />))
+            items.map(item => (<ShoppingCartItem key={item.articleNumber} item={item} />))
           }
         </div>
         <button className='checkout-btn'>Proceed to Checkout</button> 

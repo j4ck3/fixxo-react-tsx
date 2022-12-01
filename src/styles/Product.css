@@ -107,13 +107,12 @@
 
     .product-input-qty {
         width: 50px;
-        height: 43px;
+        height: 41px;
         display: flex;
-        padding: 0px;
-        font-size: 14pt;
         border: solid 1px #000;
-        z-index: 1;
         text-align: center;
+        justify-content: center;
+        align-items: center;
     }
   
         .product-size-radio {
@@ -145,6 +144,7 @@
         height: 10px;
         line-height: 10px;
         cursor: pointer;
+        user-select: none;
     }
   
         #inc-button {

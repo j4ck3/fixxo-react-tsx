@@ -1,14 +1,16 @@
 import React from 'react'
-import { useShoppingCart } from '../contexts/ShoppingCartContext'
-
+import { ShoppingCartContextType, useShoppingCartContext } from '../contexts/ShoppingCartContext'
+import { cartItem } from '../models/ShoppingCartModels'
 
 interface Props {
-  item: any
+  item: cartItem
 }
+
 
 const ShoppingCartItem:React.FC<Props> = ({item}) => {
 
-  const { incrementQuantity, decrementQuantity, removeItem } = useShoppingCart()
+  const { incrementQuantity, decrementQuantity, removeItem } = useShoppingCartContext() as ShoppingCartContextType
+
   return (
     <div className='cartitem'>
       <div className='cartitem-image'>
@@ -20,7 +22,7 @@ const ShoppingCartItem:React.FC<Props> = ({item}) => {
           <button title='minus' className='cart-btn' onClick={() => decrementQuantity(item)}><i className="fa-solid fa-minus"></i></button>
           <span>{item.quantity}</span>
           <button title='plus' className='cart-btn' onClick={() => incrementQuantity(item)}><i className="fa-solid fa-plus"></i></button>
-          <button title='remove' className='cart-btn' onClick={() => removeItem(item)}><i className="fa-solid fa-trash-can"></i></button>
+          <button title='remove' className='cart-btn' onClick={() => removeItem(item.articleNumber)}><i className="fa-solid fa-trash-can"></i></button>
         </div>
       </div>
       <div className='item-price'>

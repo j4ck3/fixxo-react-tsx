@@ -1,4 +1,4 @@
-import React, { useContext } from 'react'
+import React, { useEffect } from 'react'
 import NavBar from '../sections/NavBar';
 import Landing from '../sections/home/Landing';
 
@@ -12,26 +12,26 @@ import SaleBanner1 from '../sections/home/SaleBanner1';
 import ProductModelCategory from '../sections/Product_model_category';
 import SalesPoint from '../sections/home/SalesPoint';
 import Footer from '../sections/Footer';
+import { ProductContextType, useProductContext } from '../contexts/ProductContext';
 
-import { ProductsContext } from '../contexts/context'
 
-interface Props {
-  handleClick: (event: React.MouseEvent<HTMLButtonElement>) => void
-}
 
-const Home: React.FC<Props> = () => {
-  const productsContext: any = useContext(ProductsContext) 
 
-  const handleClick = (event: React.MouseEvent<HTMLButtonElement>) => {
-    event.preventDefault();
-  }
-  
+
+const Home: React.FC = () => {
+
+  const {products, getProducts} = useProductContext() as ProductContextType
+
+  useEffect(() => {
+    getProducts(8)
+  })
+
   return (
     <>
       <NavBar />
       <Landing />
       <SaleBanner21 />
-      <ProductModelGird title="Featured Products" items={productsContext.featuredProducts} handleClick={handleClick}/>
+      <ProductModelGird title="Featured Products" items={products} />
       <SaleBanner11 />
       <ProductActions />
       <BigBannerModel />

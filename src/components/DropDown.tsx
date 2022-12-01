@@ -19,7 +19,7 @@ const toggleDropDown = () => {
         {isActive && (
         <div className='dropdown-content'>
             {Options.map((Option) => (
-                <div onClick={(e) => {
+                <div onClick={() => {
                     setSelected(Option)
                     setIsActive(false)
                 }} className='dropdown-item'>

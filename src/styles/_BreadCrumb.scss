@@ -1,37 +1,37 @@
 .breadcrumb {
-    transition: all .2s cubic-bezier(0.19, 1, 0.22, 1);
 
-    li {
+    .home+.breadcrumb-item-sec:before {
+        padding: 8px;
+        color: black;
+        content: "\203A";
+    }
+
+    .home {
+        color: black;
+        text-decoration: none;
+
+        i {
+            margin-right: 5px;
+        }
+    }
+
+    .breadcrumb-item-main, .breadcrumb-item-sec {
         font-family: var(--font-Poppins);
         font-size: var(--font-size-16);
         font-weight: var(--font-weight-regular);
         display: inline;
         font-size: 18px;
         letter-spacing: 1px;
-    }
-
-    .home+li:before {
-        padding: 8px;
-        color: black;
-        content: "\276F";
-    }
-
-
-    .home {
-        color: black;
         text-decoration: none;
-        font-size: 18px;
-        transition: all .2s cubic-bezier(0.19, 1, 0.22, 1);
-
-        &:hover {
-            transform: translateY(-3px);
-        }
-
-        i {
-            margin-right: 5px;
-        }
     }
-    .current-page {
+
+    .breadcrumb-item-main:hover {
+        transition: all .2s cubic-bezier(0.19, 1, 0.22, 1);
+        transform: translateY(-3px);
+    }
+
+
+    .breadcrumb-item-sec {
         color: $color-theme;
     }
 }

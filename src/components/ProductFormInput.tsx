@@ -1,11 +1,16 @@
 import React, { useState } from 'react'
+import { ShoppingCartContextType, useShoppingCartContext } from '../contexts/ShoppingCartContext';
+import { ProductItem } from '../models/ProductModels';
 
 
 interface Props  {
     form_count: number;
+    item: ProductItem
 }
 
-const ProductFormInput:React.FC<Props> = ({form_count = 1}) => {
+const ProductFormInput:React.FC<Props> = ({form_count = 1, item}) => {
+
+    const { incrementQuantity } = useShoppingCartContext() as ShoppingCartContextType
 
     const [count, setCount] = useState(form_count)
     const increment = () => {
@@ -26,7 +31,7 @@ const ProductFormInput:React.FC<Props> = ({form_count = 1}) => {
             <div id="inc-button" onClick={() => increment()} className="spinner-button" data-testid='inc-button'>+</div>
             <div id="dec-button" onClick={() => decrement()}  className="spinner-button">-</div>
         </div>
-        <button className="button-product" type="submit">ADD TO CART</button>
+        <button className="button-product" type="submit" onClick={() => incrementQuantity({articleNumber: item.articleNumber, product: item, quantity: 0})}>ADD TO CART</button>
      </div>
   )
 }

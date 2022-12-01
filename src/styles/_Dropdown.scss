@@ -1,6 +1,7 @@
 .dropdown {
     width: 200px;
     position: relative;
+    padding: 10px 5px;
     z-index: 4;
     -webkit-user-select: none;
     user-select: none;
@@ -9,8 +10,8 @@
        background-color: #fff;
        font-weight: 400;
        color: black;
+       cursor: pointer;
        border: 1px solid black;
-       cursor: pointer
     }
 
     .dropdown-content {

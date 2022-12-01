@@ -8,7 +8,7 @@ const CreateForm:React.FC = () => {
 
   return (
     <>
-        <form onSubmit={create}>
+        <form onSubmit={create} className='my-5 d-gird'>
           <h3>Create User</h3>
             <input value={userRequest.firstName} onChange={(e) => setUserRequest({...userRequest, firstName: e.target.value})} type='text' className='form-control py-2' placeholder='Enter your Name'></input>
             <input value={userRequest.lastName} onChange={(e) => setUserRequest({...userRequest, lastName: e.target.value})} type='text' className='form-control py-2' placeholder='Enter your '></input>

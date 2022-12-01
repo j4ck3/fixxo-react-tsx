@@ -3,15 +3,15 @@ import { useParams } from 'react-router-dom'
 import { IUserContext, UserContext} from '../contexts/UserContext'
 
 const UpdateForm = () => {
-    const id = useParams()
+/*     const id = useParams() */
     const {user, setUser, get, update} = React.useContext(UserContext) as IUserContext
 
-    useEffect(() => {
+/*     useEffect(() => {
         get(id) 
       }, [get, id])
   
 
-
+ */
   return (
     <>
         <form onSubmit={update}>

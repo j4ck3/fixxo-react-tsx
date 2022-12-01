@@ -1,28 +1,34 @@
+import  { createContext, useContext, useState } from 'react'
 import ShoppingCart from "../components/ShoppingCart"
+import { cartItem } from '../models/ShoppingCartModels'
 
-const  { createContext, useContext, useState } = require("react")
 
-const ShoppingCartContext = createContext()
-
-export const useShoppingCart = () => {
-    return useContext(ShoppingCartContext)
+export interface ShoppingCartProviderType {
+    children: any
 }
 
-export const ShoppingCartProvider = ({children}: any) => {
-    const [cartItems, setCartItems] = useState ([])
+export interface ShoppingCartContextType {
+    items: cartItem[]
+    cartQuantity: number
+    incrementQuantity: (cartItem: cartItem) => void
+    decrementQuantity: (cartItem: cartItem) => void
+    removeItem: (articleNumber: string) => void
 
-    const cartQuantity:number | null = cartItems.reduce((quantity:number, item: { quantity: number }) => item.quantity + quantity, 0)
+}
 
-    const getItemQuantity = (articleNumber: number, item: any) => {
-        return cartItems.find(item.articleNumber === articleNumber)?.quantity || 0
-    }
+export const ShoppingCartContext = createContext<ShoppingCartContextType| null>(null)
+export const useShoppingCartContext = () => { return useContext(ShoppingCartContext) }
+
+export const ShoppingCartProvider:React.FC<ShoppingCartProviderType> = ({children}) => {
+    const [items, setItems] = useState<cartItem[]> ([])
+
+    const cartQuantity = items.reduce((quantity, item) => item.quantity + quantity, 0)
 
 
-
-    const incrementQuantity = (cartItem: any) => {
+    const incrementQuantity = (cartItem: cartItem) => {
         const  {articleNumber, product} = cartItem
 
-        setCartItems ((items: any[]) => {
+        setItems (items => {
             if   (items.find(item => item.articleNumber === articleNumber) == null) {
                 return [...items, {articleNumber, product, quantity: 1}]
             }else{
@@ -37,11 +43,11 @@ export const ShoppingCartProvider = ({children}: any) => {
         })
     }
 
-    const decrementQuantity = (cartItem: any) => {
+    const decrementQuantity = (cartItem: cartItem) => {
         const  {articleNumber} = cartItem
 
-        setCartItems ((items: any[]) => {
-            if   (items.find(item => item.articleNumber === articleNumber).quantity === 1) {
+        setItems (items => {
+            if   (items.find(item => item.articleNumber === articleNumber)?.quantity === 1) {
                 return items.filter(item => item.articleNumber !== articleNumber)
             }else{
                 return items.map(item => {
@@ -55,15 +61,12 @@ export const ShoppingCartProvider = ({children}: any) => {
         })
     }
     
-    const removeItem = (cartItem: any) => {
-        const  {articleNumber} = cartItem
-        setCartItems((items: any[]) => {
-            return items.filter(item => item.articleNumber !== articleNumber)
-        })
+    const removeItem = (articleNumber: string) => {
+        setItems(items => {return items.filter(item => item.articleNumber !== articleNumber)})
     }
 
-    return <ShoppingCartContext.Provider value={{cartItems, cartQuantity, getItemQuantity, incrementQuantity, decrementQuantity, removeItem}}>
+    return <ShoppingCartContext.Provider value={{items, cartQuantity, incrementQuantity, decrementQuantity, removeItem}}>
         {children}
-        <ShoppingCart cartItems={[]} />
+        <ShoppingCart />
     </ShoppingCartContext.Provider>
 }

@@ -1,13 +1,17 @@
 import React from 'react'
+import { NavLink } from 'react-router-dom'
+import { ShoppingCartContextType, useShoppingCartContext } from '../contexts/ShoppingCartContext'
+import { ProductItem } from '../models/ProductModels'
 
 
 interface Props {
-    item: any;
-    handleClick: (event: React.MouseEvent<HTMLButtonElement>) => void
+    item: ProductItem
 }
 
+const ModelItem:React.FC<Props> = ({item}) => {
 
-const model_item:React.FC<Props> = ({item, handleClick}) => {
+const { incrementQuantity } = useShoppingCartContext() as ShoppingCartContextType
+
   return (
     <>
         <div className="col">
@@ -15,11 +19,11 @@ const model_item:React.FC<Props> = ({item, handleClick}) => {
                 <div className="category-grid-body w-100">
                     <img className='model-item-img' src={item.imageName} alt={item.name} />
                     <ul className='arrivals-menu'>
-                        <li><button title="add to wishlist"><i className="fa-solid fa-heart"></i></button></li>
-                        <li><button title="compare this item"><i className="fa-solid fa-shuffle"></i></button></li>
-                        <li><button title="add to cart" onClick={() => handleClick(item)}><i className="fa-solid fa-cart-shopping"></i></button></li>
+                        <li><button><i className="fa-solid fa-heart"></i></button></li>
+                        <li><button><i className="fa-solid fa-shuffle"></i></button></li>
+                        <li><button onClick={() => incrementQuantity({articleNumber: item.articleNumber, product: item, quantity: 0})} ><i className="fa-solid fa-cart-shopping"></i></button></li>
                     </ul>
-                    <a className="featured-btn" href="#">quick view</a>
+                    <NavLink to={`/product/${item.articleNumber}`} className="featured-btn">quick view</NavLink>
                 </div>
                 <div className="featured-grid-info">
                     <h4>{item.category}</h4>
@@ -37,4 +41,4 @@ const model_item:React.FC<Props> = ({item, handleClick}) => {
   )
 }
 
-export default model_item
+export default ModelItem

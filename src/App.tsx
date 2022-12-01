@@ -1,62 +1,40 @@
-import React, { useState, useEffect } from 'react';
+import React from 'react';
 import { BrowserRouter, Route, Routes } from 'react-router-dom';
-import { ProductsContext } from './contexts/context'
+import ProductProvider from './contexts/ProductContext'
 import UserProvider from './contexts/UserContext'
-import './App.css'
+import { ShoppingCartProvider } from './contexts/ShoppingCartContext';
 
 import Home from './views/Home';
-
 import NotFound from './views/NotFound';
 import Categories from './views/Categories';
-import Product from './views/Product';
 import Wishlist from './views/Wishlist';
 import Compare from './views/Compare';
 import Contact from './views/Contact';
 import Users from './views/Users';
-
-
+import Product from './views/ProductDetail';
+import Products from './views/Products';
+import './App.min.css'
 
 const App: React.FC = () => {
 
-
-
-
-  const [products, setProducts] = useState ({ 
-    allProducts: [],
-    featuredProducts: []
-  })
-
-  useEffect (() => {
-    const fetchAllProducts= async () => {
-      let result = await fetch('https://win22-webapi.azurewebsites.net/api/products?take=4')
-      setProducts({...products, allProducts: await result.json()}) 
-    }
-    fetchAllProducts()
-
-    const fetchFeaturedProducts = async () => {
-      let result = await fetch('https://win22-webapi.azurewebsites.net/api/products?take=8')
-      setProducts({...products, featuredProducts: await result.json()}) 
-    }
-    fetchFeaturedProducts()
-
-  }, [setProducts])
-
   return (
     <BrowserRouter>
-    <UserProvider>
-      <ProductsContext.Provider value={products}>
-      <Routes>
-        <Route path='/' element={<Home handleClick={function (event: React.MouseEvent<HTMLButtonElement, MouseEvent>): JSX.Element { throw new Error('Function not implemented.')} } />} />
-        <Route path='/Contact' element={<Contact />} />
-        <Route path='/Categories' element={<Categories /> } /> 
-        <Route path='/Product' element={<Product name={undefined} item={undefined} handleClick={function (event: React.MouseEvent<HTMLButtonElement, MouseEvent>): void {
-            throw new Error('Function not implemented.');} } /> } />
-        <Route path='/Users' element={<Users /> } /> 
-        <Route path='/Wishlist' element={<Wishlist /> } />
-        <Route path='/Compare' element={<Compare /> } />
-        <Route path='*' element={<NotFound />} />
-      </Routes>
-      </ProductsContext.Provider>
+      <UserProvider>
+        <ShoppingCartProvider>
+          <ProductProvider>
+            <Routes>
+              <Route path='/' element={<Home />} />
+              <Route path='/Contact' element={<Contact />} />
+              <Route path='/Categories' element={<Categories /> } /> 
+              <Route path='/Product/:id' element={<Product /> } /> 
+              <Route path='/Products' element={<Products /> } /> 
+              <Route path='/Users' element={<Users /> } /> 
+              <Route path='/Wishlist' element={<Wishlist /> } />
+              <Route path='/Compare' element={<Compare /> } />
+              <Route path='*' element={<NotFound />} />
+            </Routes>
+          </ProductProvider>
+        </ShoppingCartProvider>
       </UserProvider>
     </BrowserRouter>
   );
