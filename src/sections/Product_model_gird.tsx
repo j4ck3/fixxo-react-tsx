@@ -2,8 +2,6 @@ import React from 'react'
 import ModelItem from '../components/ModelItem'
 import { ProductItem } from '../models/ProductModels'
 
-
-
 interface Props {
   title: string
   items: ProductItem[]

@@ -1,4 +1,4 @@
-.featured-body{
+.model-item-body{
     background-color: var(--color-gray-1);
     height: 210px;
     position: relative;
@@ -7,19 +7,13 @@
     transition: all .2s;
 }
 
-.featured-body:hover{
-    background-color: rgba(26, 26, 26, 0.178);
-}
-
-
 .featured-title {
-    font-size: 1.5rem;
+    font-size: 22px;
     font-weight: bold;
     text-align: center;
-    margin: 1rem;
 }
 
-.arrivals-menu{
+.model-item-menu, .featured-menu{
     list-style: none;
     z-index: 2;
     position: absolute;
@@ -29,20 +23,17 @@
     transition: all .2s ease-in-out;
 }
 
-.featured-body .model-item-img {
-    width: 100%;
-    object-fit: cover;
+.model-item-img {
+    max-height: 100%;
+    transform: translate(-50%, 0);
+    margin-left: 50%;
 }
 
-.featured-body:hover .arrivals-menu{
+.model-item-body:hover .model-item-menu, .category-grid-body:hover .model-item-menu{
     right: 12px;
 }
 
-.category-grid-body:hover .arrivals-menu{
-    right: 12px;
-}
-
-.featured-body .arrivals-menu li, .category-grid-body .arrivals-menu li{   
+.model-item-menu li{   
     background-color: rgb(255, 255, 255);
     border-radius: 50px;
     box-shadow: 0px 0px 4px 3px rgb(0 0 0 / 34%);
@@ -50,7 +41,7 @@
     margin-bottom: 1rem;
 }
 
-.featured-body .arrivals-menu li button, .category-grid-body .arrivals-menu li button{
+.model-item-menu li button{
     color: black;
     font-size: 12px;
     border: none;
@@ -58,17 +49,17 @@
     padding: 0;
 }   
 
-    .arrivals-menu li:hover{
+    .model-item-menu li:hover{
         color: white;
         background-color: #23262A;
     }
 
-    .arrivals-menu li:hover i{
+    .model-item-menu li:hover i{
         color: white;
     }
 
 
-.featured-btn{
+.model-item-btn{
     color: white;
     font-family: var(--font-Poppins);
     font-weight: var(--font-weight-regular);
@@ -89,45 +80,43 @@
     transition: all .2s ease-in-out;
 } 
 
-    .featured-body:hover .featured-btn,
-    .category-grid-body:hover .featured-btn
-    {
-        color: white;
-        opacity: 1;
+    .model-item-body:hover .model-item-btn, .category-grid-body:hover .model-item-btn {
+        opacity: 1; 
+        color: white
     }
 
-    .featured-grid-info h4,
-    .sec-grid-info h4{
+    .model-item-info h4{
         font-size: 13px;
         font-weight: var(--font-weight-regular);
         color: #616365;
         margin: 10px 0;
     }
 
-    .featured-grid-info h3{
+    .model-item-info h3{
         font-size: 20px;
         font-weight: var(--font-weight-semi-bold);
         color: #23262A;
         margin-top: 10px;
     }
 
-    .featured-grid-info p, .sec-grid-info p{
+    .model-item-info p{
         font-size: 18px;
         font-weight: var(--font-weight-semi-bold);
         color: #23262A;
         margin-top: 10px;
     }
 
-        .featured-grid-info i{
+        .model-item-info i{
             color: var(--color-theme);
         }
 
 @media screen and (max-width: 768px) {
-    .featured-btn {
+
+    .model-item-btn {
         opacity: 1;
     }
 
-    .arrivals-menu {
+    .model-item-menu {
         opacity: 1;
         right: 12px;
     }

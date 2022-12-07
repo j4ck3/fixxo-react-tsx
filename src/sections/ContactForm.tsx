@@ -8,7 +8,7 @@ interface Props {
 
 
 
-const ContactForm:React.FC<Props> = () => {
+const ContactForm:React.FC = () => {
 
   const [contactForm, setContactForm] = useState({name: '', email: '', comments: ''})
   const [formErrors, setFormErrors] = useState({name: '', email: '', comments: ''})
@@ -107,13 +107,13 @@ const ContactForm:React.FC<Props> = () => {
           <form noValidate onSubmit={handleSubmit}>
             <div>
               <input className={`${ formErrors.name ? "error" : ""}`} id='name' type='text' 
-              placeholder='Your Name' value={contactForm.name} onChange={handleChange} /* onKeyUp={handleChange} *//>
+              placeholder='Your Name' value={contactForm.name} onChange={handleChange}/>
 
               <div className='error-message'>{formErrors.name}</div>
             </div>
             <div>
               <input className={`${ formErrors.email ? "error" : ""}`} id='email' type='email' autoComplete='off' 
-              placeholder='Your Email Adress' value={contactForm.email} onChange={handleChange} /* onKeyUp={handleChange} *//>
+              placeholder='Your Email Adress' value={contactForm.email} onChange={handleChange}/>
 
               <div className='error-message'>{formErrors.email}</div>
             </div>

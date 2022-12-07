@@ -21,11 +21,11 @@ import { ProductContextType, useProductContext } from '../contexts/ProductContex
 
 const Product:React.FC = () => {
   const {id} = useParams<string>()
-  const {product, getProduct, products, getProducts} = useProductContext() as ProductContextType
+  const {product, getProduct, products, getProductByTag} = useProductContext() as ProductContextType
 
   useEffect(() => {
     getProduct(id)
-    getProducts(4)
+    getProductByTag(4)
   }, [])
   
 

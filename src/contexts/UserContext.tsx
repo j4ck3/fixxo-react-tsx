@@ -1,6 +1,6 @@
 import React, {useState, useContext, createContext} from 'react'
-/* import { Params } from 'react-router-dom' */
-import {User, UserRequest} from '../models/UserModels'
+import { Params } from 'react-router-dom'
+import { User, UserRequest} from '../models/UserModels'
 import { UserProviderProps } from '../models/UserProviderPropsModels'
 
 
@@ -21,7 +21,7 @@ export const UserContext = createContext<IUserContext | null>(null)
 export const useUserContext = () => { return useContext(UserContext)}
 
 const UserProvider = ({children} : UserProviderProps) => {
-    const baseUrl = 'http://localhost5000/api/users'
+    const baseUrl = 'http://localhost:5000/api/users'
     const defaultUserValues: User = {id: 0, firstName: '', lastName: '', email: ''}
     const defaultUserRequestValues: UserRequest = {firstName: '', lastName: '', email: '', password: ''}
 
@@ -33,14 +33,14 @@ const UserProvider = ({children} : UserProviderProps) => {
 
     const create = async (e: React.FormEvent) => {
         e.preventDefault()
-        const result = await fetch(`${baseUrl}`, {
+        const result = await fetch(`${baseUrl}`, { 
             method: 'POST',
             headers: {
                 'Content-Type': `application/json`
             } ,
             body: JSON.stringify(userRequest)
         })
-        if (result.status === 200) {
+        if (result.status === 201) {
             setUserRequest(defaultUserRequestValues)    
         }
     }
@@ -59,7 +59,7 @@ const UserProvider = ({children} : UserProviderProps) => {
     const update = async (e: React.FormEvent) => {
         e.preventDefault()
         const result = await fetch(`${baseUrl}/${user.id}`, {
-            method: 'PUT',
+            method: 'put',
             headers: {
                 'Content-Type': `application/json`
             } ,

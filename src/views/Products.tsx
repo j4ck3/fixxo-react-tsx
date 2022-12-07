@@ -10,7 +10,7 @@ const Products:React.FC = () => {
 
 
     useEffect(() =>{
-        getProducts(50)
+        getProducts()
     }, [])
 
   return (
