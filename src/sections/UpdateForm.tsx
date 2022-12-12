@@ -7,16 +7,11 @@ const UpdateForm = () => {
   const id = useParams()
     const {user, setUser, get, update} = React.useContext(UserContext) as IUserContext
 
- /*    useEffect(() => {
-        get(id) 
-      }, [get])
-
- */
   return (
     <>
         <form onSubmit={update}>
             <h3>Update User <i className="fa-solid fa-user-pen"></i></h3>
-            <input type='hidden' value={user.id}/>
+            <input type='hidden' value={user.id.toString()}/>
             <input value={user.firstName} onChange={(e) => setUser({...user, firstName: e.target.value})} type='text' className='form-control py-2' placeholder='Enter your Name'></input>
             <input value={user.lastName} onChange={(e) => setUser({...user, lastName: e.target.value})} type='text' className='form-control py-2' placeholder='Enter your '></input>
             <input value={user.email} onChange={(e) => setUser({...user, email: e.target.value})} type='email' className='form-control py-2' placeholder='Enter your Email Adress'></input>

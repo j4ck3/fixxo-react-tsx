@@ -1,6 +1,6 @@
 import React, {useState, useContext, createContext} from 'react'
-import { Params } from 'react-router-dom'
-import { User, UserRequest} from '../models/UserModels'
+/* import { Params } from 'react-router-dom' */
+import { User, UserRequest, UserSignIn} from '../models/UserModels'
 import { UserProviderProps } from '../models/UserProviderPropsModels'
 
 
@@ -8,32 +8,37 @@ export interface IUserContext {
     user: User
     setUser: React.Dispatch<React.SetStateAction<User>>
     userRequest: UserRequest
+    userSignIn: UserSignIn
     setUserRequest: React.Dispatch<React.SetStateAction<UserRequest>>
+    setUserSignIn: React.Dispatch<React.SetStateAction<UserSignIn>>
     users: User[]
-    create: (e: React.FormEvent) => void
-    get: (id: number) => void
+    signUp: (e: React.FormEvent) => void
+    signIn: (e: React.FormEvent) => void
+    get: (id: String) => void
     getAll: () => void
     update: (e: React.FormEvent) => void
-    remove: (id: number) => void
+    remove: (id: String) => void
 }
 
 export const UserContext = createContext<IUserContext | null>(null)
 export const useUserContext = () => { return useContext(UserContext)}
 
 const UserProvider = ({children} : UserProviderProps) => {
-    const baseUrl = 'http://localhost:5000/api/users'
-    const defaultUserValues: User = {id: 0, firstName: '', lastName: '', email: ''}
+    const baseUrl = 'http://localhost:5000/api/authentication'
+    const defaultUserValues: User = {id: '', firstName: '', lastName: '', email: ''}
     const defaultUserRequestValues: UserRequest = {firstName: '', lastName: '', email: '', password: ''}
+    const defualtSignInValues: UserSignIn = {email: '', password: ''}
 
     const [user, setUser] = useState<User>(defaultUserValues)
     const [users, setUsers] = useState<User[]>([])
     const [userRequest, setUserRequest] = useState<UserRequest>(defaultUserRequestValues)
+    const [userSignIn, setUserSignIn] = useState<UserSignIn>(defualtSignInValues)
 
 
 
-    const create = async (e: React.FormEvent) => {
+    const signUp = async (e: React.FormEvent) => {
         e.preventDefault()
-        const result = await fetch(`${baseUrl}`, { 
+        const result = await fetch(`${baseUrl}/signup`, { 
             method: 'POST',
             headers: {
                 'Content-Type': `application/json`
@@ -44,7 +49,22 @@ const UserProvider = ({children} : UserProviderProps) => {
             setUserRequest(defaultUserRequestValues)    
         }
     }
-    const get = async (id: number) => {
+
+    const signIn = async (e: React.FormEvent) => {
+        e.preventDefault()
+        const result = await fetch(`${baseUrl}/signin`, { 
+            method: 'POST',
+            headers: {
+                'Content-Type': `application/json`
+            } ,
+            body: JSON.stringify(userSignIn)
+        })
+        if (result.status === 201) {
+            setUserSignIn(defualtSignInValues)    
+        }
+    }
+
+    const get = async (id: String) => {
         const result = await fetch(`${baseUrl}/${id}`)
         if (result.status === 200) {
             setUser(await result.json())
@@ -69,7 +89,7 @@ const UserProvider = ({children} : UserProviderProps) => {
             setUser(await result.json()) 
         }
     }
-    const remove = async (id: number) => {
+    const remove = async (id: String) => {
         const result = await fetch(`${baseUrl}/${id}`, {
             method: 'DELETE',
         })
@@ -81,7 +101,7 @@ const UserProvider = ({children} : UserProviderProps) => {
 
 
   return (
-    <UserContext.Provider value={{user, setUser, users, userRequest, setUserRequest, create, get, getAll, update, remove}}>
+    <UserContext.Provider value={{user, setUser, users, userRequest, userSignIn, setUserRequest, setUserSignIn, signUp, signIn, get, getAll, update, remove}}>
         {children}
     </UserContext.Provider>
   )

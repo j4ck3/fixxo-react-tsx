@@ -1,21 +1,20 @@
 import React, {useState} from 'react'
 
-interface Props {
+export interface IformData{
   name: string 
   email: string  
   comments: string
 }
 
 
-
 const ContactForm:React.FC = () => {
+  const DEFUALT_VALUES: IformData = {name: '', email: '', comments: ''}
+  const [contactForm, setContactForm] = useState<IformData>(DEFUALT_VALUES)
+  const [formErrors, setFormErrors] = useState<IformData>(DEFUALT_VALUES)
+  const [canSubmit, setCanSubmit] = useState<boolean>(false)
 
-  const [contactForm, setContactForm] = useState({name: '', email: '', comments: ''})
-  const [formErrors, setFormErrors] = useState({name: '', email: '', comments: ''})
-  const [canSubmit, setCanSubmit] = useState(false)
-
-  const [submitted, setSubmitted] = useState(false)
-  const [SubmitFailed, setSubmitFailed] = useState(false)
+  const [submitted, setSubmitted] = useState<boolean>(false)
+  const [SubmitFailed, setSubmitFailed] = useState<boolean>(false)
 
   const handleChange = (e: { target: { id: string; value: string } })=> {
     const {id, value} = e.target
@@ -23,32 +22,31 @@ const ContactForm:React.FC = () => {
     setFormErrors(validate(contactForm))
   }
 
-  const validate = (values: Props) => {
+  const validate = (contactForm: IformData) => {
     const errors = {name: '', email: '', comments: ''}
     const regex_email = /^(([^<>()[\]\.,;:\s@\"]+(\.[^<>()[\]\.,;:\s@\"]+)*)|(\".+\"))@(([^<>()[\]\.,;:\s@\"]+\.)+[^<>()[\]\.,;:\s@\"]{2,})$/i
     const regex_name = /^[A-Za-z]{1,30}$/
 
     //name
-      if (values.name.length <= 1)
+      if (contactForm.name.length <= 1)
         errors.name = 'Name must be at least two character long'
-        else if (!regex_name.test(values.name))
+        else if (!regex_name.test(contactForm.name))
           errors.name = 'Name can only contain only letters'
 
     //email
-    if (!regex_email.test(values.email))
+    if (!regex_email.test(contactForm.email))
       errors.email = 'You must enter a valid Email Adress'
     
-
     //comments
-    if (values.comments.length <= 4) 
+    if (contactForm.comments.length <= 4) 
       errors.comments = 'Comment must be at least five characters long'
-        else if (values.comments.length >= 2000)
+        else if (contactForm.comments.length >= 2000)
         errors.comments = 'Comment cannot exceed 2000 characters'
 
-    if (Object.keys(errors).length === 0)
+    if (errors.name === '' && errors.email === '' && errors.comments === '')
       setCanSubmit(true)
-    else
-      setCanSubmit(false)
+      else
+        setCanSubmit(false)
 
     return errors;
   }
@@ -107,19 +105,19 @@ const ContactForm:React.FC = () => {
           <form noValidate onSubmit={handleSubmit}>
             <div>
               <input className={`${ formErrors.name ? "error" : ""}`} id='name' type='text' 
-              placeholder='Your Name' value={contactForm.name} onChange={handleChange}/>
+              placeholder='Your Name' value={contactForm.name} onChange={handleChange} />
 
               <div className='error-message'>{formErrors.name}</div>
             </div>
             <div>
               <input className={`${ formErrors.email ? "error" : ""}`} id='email' type='email' autoComplete='off' 
-              placeholder='Your Email Adress' value={contactForm.email} onChange={handleChange}/>
+              placeholder='Your Email Adress' value={contactForm.email} onChange={handleChange} />
 
               <div className='error-message'>{formErrors.email}</div>
             </div>
             <div className='textarea' >
-              <textarea className={`${ formErrors.comments ? "error" : ""}`} id='comments' /* type='text'  */
-              placeholder='Comments' value={contactForm.comments} onChange={handleChange} /* onKeyUp={handleChange} *//>
+              <textarea className={`${ formErrors.comments ? "error" : ""}`} id='comments'
+              placeholder='Comments' value={contactForm.comments} onChange={handleChange} />
 
               <div className='error-message'>{formErrors.comments}</div>
             </div>

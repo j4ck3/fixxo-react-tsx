@@ -11,7 +11,7 @@ const Users:React.FC = () => {
         <NavBar/>
         <BreadCrumb currentPage='Users' />
         <CreateForm />
-        <UserList />
+{/*         <UserList /> */}
         <Footer/>
     </>
   )

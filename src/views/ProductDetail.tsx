@@ -1,26 +1,25 @@
 import React, {useEffect, useState} from 'react'
 import { TabPanel, useTabs } from 'react-headless-tabs'
 import { TabSelector } from '../views/TabSelector'
+import { useParams } from 'react-router-dom'
+import { ProductContextType, useProductContext } from '../contexts/ProductContext'
+
 
 import product_img_1 from '../sections/home/imgs/home-container-1.svg'
 import product_img_2 from '../sections/home/imgs/home-container-2.svg'
 
 import NavBar from '../sections/NavBar'
-import Footer from '../sections/Footer'
 import SaleNote from '../sections/SaleNote'
 import BreadCrumb from '../sections/BreadCrumb'
 import ProductModelGird from '../sections/Product_model_gird'
 import ReadMore from '../components/ReadMore'
 import DropDown from '../components/DropDown'
 import ProductFormInput from '../components/ProductFormInput'
-import { useParams } from 'react-router-dom'
-import { ProductContextType, useProductContext } from '../contexts/ProductContext'
-
 
 
 
 const Product:React.FC = () => {
-  const {id} = useParams<string>()
+  const id = useParams()
   const {product, getProduct, products, getProductByTag} = useProductContext() as ProductContextType
 
   useEffect(() => {
@@ -67,6 +66,7 @@ const [selectedTab, setSelectedTab] = useTabs([
                 <i className="fa-solid fa-star"></i>
             </div>
             <h4 className="mt-3">${product.price}</h4>
+
             <ReadMore>
             Discovered had get considered projection who favourable. 
             Necessary up knowledge it tolerably. Unwilling departure education 
@@ -165,7 +165,7 @@ const [selectedTab, setSelectedTab] = useTabs([
     <ProductModelGird title="Featured Products" items={products} />
 
 
-    <Footer />
+{/*     <Footer /> */}
     </>
   )
 }

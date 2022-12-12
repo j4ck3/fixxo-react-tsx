@@ -24,7 +24,7 @@ const Home: React.FC = () => {
 
   useEffect(() => {
     getProductByTag(8)
-    getProductsByCategory('bags')
+    getProductsByCategory('Bags')
     getProductsByRating(5)
   }, [])
 

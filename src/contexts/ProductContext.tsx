@@ -1,3 +1,4 @@
+import { ObjectId } from 'mongodb';
 import { useContext, createContext, useState} from 'react'
 import { ProductItem } from '../models/ProductModels';
 
@@ -10,7 +11,7 @@ export interface ProductContextType {
     products: ProductItem[]
     productsByCategory: ProductItem[]
     productsByRating: ProductItem[]
-    getProduct: (articleNumber?: string) => void
+    getProduct: (id?: any) => void
     getProducts: () => void;
     getProductsByCategory: (category?: string) => void;
     getProductsByRating: (rating?: number) => void;
@@ -21,18 +22,19 @@ export const ProductContext = createContext<ProductContextType | null>(null)
 export const useProductContext = () => { return useContext(ProductContext) }
 
 export const ProductProvider: React.FC<Props> = ({children}) => {
-    const EMPTY_PRODUCT_ITEM: ProductItem = {articleNumber: '', tag: '', name: '', category: '', description: '', price: 0, imageName: '', item: null}
+    const EMPTY_PRODUCT_ITEM: ProductItem = {articleNumber: '', tag: '', name: '', category: '', description: '', price: 0, rating: 0, imageName: '', item: null}
     const baseUrl:string = 'http://localhost:5000/api/products'
     const [product, setProduct] = useState<ProductItem>(EMPTY_PRODUCT_ITEM)
     const [products, setProducts] = useState<ProductItem[]>([])
     const [productsByCategory, setProductsByCategory] = useState<ProductItem[]>([])
     const [productsByRating, setProductsByRating] = useState<ProductItem[]>([])
 
-    const getProduct = async (articleNumber?: string) => {
-        if (articleNumber !== undefined){
-            const res = await fetch(`${baseUrl}/product/${articleNumber}`)
+    const getProduct = async (id: any) => {
+        if (id !== undefined){
+            console.log(id)
+            const res = await fetch(`${baseUrl}/product/${id}`)
             setProduct(await res.json())
-        }
+        }  
     }
 
     const getProducts = async () => {

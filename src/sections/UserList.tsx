@@ -10,11 +10,11 @@ const UserList:React.FC = () => {
         getAll()
     }, [getAll])
 
-    const removeUser = (id: number) => {
+    const removeUser = (id: String) => {
         remove(id)
     }
 
-    const getUser = (id: number) => {
+    const getUser = (id: String) => {
         get(id)
     }
 
@@ -24,7 +24,7 @@ const UserList:React.FC = () => {
             {
                 users.map((user: User) => (
 
-                <div key={user.id} className='my-3 w-100'>{user.id} {user.firstName} {user.lastName} {user.email}
+                <div key={user.id.toString()} className='my-3 w-100'>{user.id} {user.firstName} {user.lastName} {user.email}
                     <div className='d-inline-block'>
                         <button className='border-0 rounded' onClick={() => removeUser(user.id)}><i className="fa-solid fa-trash"></i></button>
                         <button className='border-0 rounded' onClick={() => get(user.id)}><i className="fa-solid fa-user"></i></button>

@@ -1,5 +1,5 @@
 export interface User {
-   id: number
+   id: String
    firstName: string
    lastName: string
    email: string
@@ -11,5 +11,11 @@ export interface UserRequest {
     email: string
     password: string 
  }
+
+ export interface UserSignIn {
+   email: string
+   password: string 
+}
+
  
 
