@@ -15,18 +15,23 @@ import ProductModelGird from '../sections/Product_model_gird'
 import ReadMore from '../components/ReadMore'
 import DropDown from '../components/DropDown'
 import ProductFormInput from '../components/ProductFormInput'
+import { gql, useQuery } from '@apollo/client'
+
 
 
 
 const Product:React.FC = () => {
   const id = useParams()
-  const {product, getProduct, products, getProductByTag} = useProductContext() as ProductContextType
+
+
+
+
+  const {product, getProduct, products, getProductByTag, productgql, getProductgql} = useProductContext() as ProductContextType
 
   useEffect(() => {
-    getProduct(id)
+    getProductgql(id)
     getProductByTag(4)
   }, [])
-  
 
 const [selected, setSelected] = useState<string>('Choose an Option')
 const [selectedTab, setSelectedTab] = useTabs([
@@ -36,19 +41,17 @@ const [selectedTab, setSelectedTab] = useTabs([
     'Reviews',
 ]);
 
-
   return (
     <>
     <NavBar />
     <SaleNote />
-    <BreadCrumb currentPage={product.name} />
-
+    <BreadCrumb currentPage={productgql.name} />
 
     <div className="container-xxl">
     <div className="row mt-5 product-container">
         <div className="col-md-6">
             <div className="images">
-                <div className="text-center mb-4"><img id="main-image" src={product.imageName} alt="product" /></div>
+                <div className="text-center mb-4"><img id="main-image" src={productgql.imageName} alt="product" /></div>
                     <div className="text-center"> <img className="sec-image" src={product_img_1} alt="product" />
                                                   <img className="sec-image" src={product_img_2} alt="product" />
                     </div>
@@ -56,8 +59,8 @@ const [selectedTab, setSelectedTab] = useTabs([
         </div>
         <div className='col'>
         <div className="col-2 w-100">
-            <h1>{product.name}</h1>
-            <h3 className="text-uppercase">{product.category}</h3>
+            <h1>{productgql.name}</h1>
+            <h3 className="text-uppercase">{productgql.category}</h3>
             <div className="product-rating mt-3">
                 <i className="fa-solid fa-star"></i>
                 <i className="fa-solid fa-star"></i>
@@ -65,7 +68,7 @@ const [selectedTab, setSelectedTab] = useTabs([
                 <i className="fa-solid fa-star"></i>
                 <i className="fa-solid fa-star"></i>
             </div>
-            <h4 className="mt-3">${product.price}</h4>
+            <h4 className="mt-3">${productgql.price}</h4>
 
             <ReadMore>
             Discovered had get considered projection who favourable. 
@@ -162,10 +165,10 @@ const [selectedTab, setSelectedTab] = useTabs([
 </div>
 
 
-    <ProductModelGird title="Featured Products" items={products} />
+    <ProductModelGird title="Featured Products"/>
 
 
-{/*     <Footer /> */}
+
     </>
   )
 }

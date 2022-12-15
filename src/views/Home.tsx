@@ -25,7 +25,7 @@ const Home: React.FC = () => {
   useEffect(() => {
     getProductByTag(8)
     getProductsByCategory('Bags')
-    getProductsByRating(5)
+    getProductsByRating('5')
   }, [])
 
   return (
@@ -33,7 +33,7 @@ const Home: React.FC = () => {
       <NavBar />
       <Landing />
       <SaleBanner21 />
-      <ProductModelGird title='Featured Products' items={products} />
+      <ProductModelGird title='Featured Products' />
       <SaleBanner11 />
       <ProductActions />
       <BigBannerModel items={productsByCategory} />

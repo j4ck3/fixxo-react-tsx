@@ -4,17 +4,13 @@ import { ShoppingCartContextType, useShoppingCartContext } from '../contexts/Sho
 import { ProductItem } from '../models/ProductModels'
 
 
-interface Props {
-    item: ProductItem
-}
+
+
+const ModelItem = ({item}) => {
 
 
 
-const ModelItem:React.FC<Props> = ({item}) => {
-
-/* const stars = Array.from({length: amount}, (e, id) => { */
-
-const { incrementQuantity } = useShoppingCartContext() as ShoppingCartContextType
+const { incrementQuantity } = useShoppingCartContext()
 
   return (
     <>
@@ -25,9 +21,9 @@ const { incrementQuantity } = useShoppingCartContext() as ShoppingCartContextTyp
                     <ul className='model-item-menu'>
                         <li><button><i className="fa-solid fa-heart"></i></button></li>
                         <li><button><i className="fa-solid fa-shuffle"></i></button></li>
-                        <li><button onClick={() => incrementQuantity({articleNumber: item.articleNumber, product: item, quantity: 0})}><i className="fa-solid fa-cart-shopping"></i></button></li>
+                        <li><button onClick={() => incrementQuantity({articleNumber: item._id, product: item, quantity: 0})}><i className="fa-solid fa-cart-shopping"></i></button></li>
                     </ul>
-                    <NavLink to={`/products/product/${item.articleNumber}`} className="model-item-btn">quick view</NavLink>
+                    <NavLink to={`/products/product/${item._id}`} className="model-item-btn">quick view</NavLink>
                 </div>
                 <div className="model-item-info">
                     <h4>{item.category}</h4>

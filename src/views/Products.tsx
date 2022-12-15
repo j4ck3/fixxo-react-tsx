@@ -6,18 +6,18 @@ import ProductModelGird from '../sections/Product_model_gird'
 import { ProductContextType, useProductContext } from '../contexts/ProductContext'
 
 const Products:React.FC = () => {
-    const {products, getProducts } = useProductContext() as ProductContextType
+/*     const {products, getProducts } = useProductContext() as ProductContextType */
 
 
-    useEffect(() =>{
+/*     useEffect(() =>{
         getProducts()
-    }, [])
+    }, []) */
 
   return (
     <>
         <NavBar/>
         <BreadCrumb currentPage='Products'/>
-        <ProductModelGird title='All Products' items={products}  />
+        <ProductModelGird title='All Products'  />
         <Footer/>
     </>
   )
