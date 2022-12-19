@@ -4,6 +4,7 @@
     grid-template-rows: repeat(1, 715px);
     gap: 1rem;
     margin: 4rem 0;
+    overflow: hidden;
 }
 
 .sec-grid-big { grid-area: 1 / 1 / 2 / 2; }

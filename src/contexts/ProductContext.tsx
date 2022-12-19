@@ -1,4 +1,3 @@
-import { gql, useQuery } from '@apollo/client';
 import { useContext, createContext, useState} from 'react'
 import { ProductItem } from '../models/ProductModels';
 
@@ -8,16 +7,15 @@ interface Props {
 
 export interface ProductContextType {
     product: ProductItem
-    productgql: ProductItem
     products: ProductItem[]
     productsByCategory: ProductItem[]
     productsByRating: ProductItem[]
-    getProduct: (id?: any) => void
-    getProductgql: (id?: any) => void
+    productsByTag: ProductItem[]
+    getProduct: (productId?: any) => void
     getProducts: () => void;
     getProductsByCategory: (category?: string) => void;
     getProductsByRating: (rating?: string) => void;
-    getProductByTag: (take?: number) => void
+    getProductByTag: (tag?: string) => void
 }
 
 export const ProductContext = createContext<ProductContextType | null>(null)
@@ -25,69 +23,111 @@ export const useProductContext = () => { return useContext(ProductContext) }
 
 export const ProductProvider: React.FC<Props> = ({children}) => {
     const EMPTY_PRODUCT_ITEM: ProductItem = {articleNumber: '', tag: '', name: '', category: '', description: '', price: '', rating: '', imageName: '', vendorId: '', item: null}
-    const baseUrl:string = 'http://localhost:5000/api/products'
+    const baseUrl:string = 'http://localhost:5000/graphql'
     const [product, setProduct] = useState<ProductItem>(EMPTY_PRODUCT_ITEM)
     const [products, setProducts] = useState<ProductItem[]>([])
     const [productsByCategory, setProductsByCategory] = useState<ProductItem[]>([])
     const [productsByRating, setProductsByRating] = useState<ProductItem[]>([])
-    const [productgql, setProductgql] = useState<ProductItem>(EMPTY_PRODUCT_ITEM)
+    const [productsByTag, setProductsByTag] = useState<ProductItem[]>([])
 
 
-    const getProduct = async (id: any) => {
-        if (id !== undefined){
-            const res = await fetch(`${baseUrl}/product/${id}`)
-            setProduct(await res.json())
-        }  
+    const getProduct = async (prodcutId: String) => {
+        await fetch(baseUrl, {
+            method: 'POST',
+            headers: { "content-type": "application/json"},
+            body: JSON.stringify ({
+                query: `
+                query getProduct($id: ID) { 
+                    product (id: $id) { _id, name, price, description, category, tag, rating, imageName, vendor {name}}
+                  }
+                `,
+                variables: {
+                    id: prodcutId
+                }
+            })
+        }).then(res => res.json())
+        .then(data => {
+            setProduct(data.data.product)
+        })
     }
-
-
-    const getProductgql = async (id: any) => {
-        if (id !== undefined){
-            const GET_PRODUCT = gql`{product(id: "${id}"){name, tag, price, category, description, rating}}`
-            const { loading, error, data } = useQuery(GET_PRODUCT)
-
-            if (loading) return <p>Loading...</p>
-            if (error) return <p>Could not get Product</p>
-            setProductgql(data.json())
-        }  
-    }
-
 
 
     const getProducts = async () => {
-        const res = await fetch(baseUrl)
-        setProducts(await res.json())
+        await fetch(baseUrl, {
+            method: 'POST',
+            headers: { "content-type": "application/json"},
+            body: JSON.stringify ({
+            query: 
+            `
+            { products { _id, name, price, tag, category, description, rating, imageName, vendor {name}}}
+            `
+            })
+        }).then(res => res.json())
+        .then(data => {
+            setProducts(data.data.products)
+        })
     }
 
-    const getProductByTag = async (take = 0) => {
-        let url = `${baseUrl}/tag/featured`
-
-        if (take !== 0) 
-            url += `/${take}`
-        const res = await fetch(url)
-        setProducts(await res.json())
-    }
-
-    const getProductsByCategory = async (category = '') => {
-        let url = `${baseUrl}/category`
-
-        if (category !== '') 
-            url += `/${category}`
-        const res = await fetch(url)
-        setProductsByCategory(await res.json())
-    }
-
-    const getProductsByRating = async (rating = '') => {
-        let url = `${baseUrl}/rating`
-
-        if (rating !== '') 
-            url += `/${rating}`
-        const res = await fetch(url)
-        setProductsByRating(await res.json())
+    const getProductByTag = async ( tag = '') => {
+        await fetch(baseUrl, {
+            method: 'POST',
+            headers: { "content-type": "application/json"},
+            body: JSON.stringify ({
+                query: 
+                `
+                query getProductsByTag($tag: String) { 
+                    productsByTag(tag: $tag) {
+                    _id, name, price, description, category, tag, rating, imageName, vendor {name}}}
+                `,
+                variables: {tag: tag}
+            })
+        }).then(res => res.json())
+        .then(data => {
+            setProductsByTag(data.data.productsByTag)
+        })
     }
 
 
-    return <ProductContext.Provider value={{product, productgql, products, productsByCategory, productsByRating, getProduct, getProductgql, getProducts, getProductByTag, getProductsByCategory, getProductsByRating}}>
+    const getProductsByCategory = async ( category = '') => {
+        await fetch(baseUrl, {
+            method: 'POST',
+            headers: { "content-type": "application/json"},
+            body: JSON.stringify ({
+                query: 
+                `
+                query getProductsByCategory($category: String) { 
+                    productsByCategory(category: $category) {
+                    _id, name, price, description, category, tag, rating, imageName, vendor {name}}}
+                `,
+                variables: {category: category}
+            })
+        }).then(res => res.json())
+        .then(data => {
+            setProductsByCategory(data.data.productsByCategory)
+        })
+    }
+
+    const getProductsByRating = async ( rating = '') => {
+        await fetch(baseUrl, {
+            method: 'POST',
+            headers: { "content-type": "application/json"},
+            body: JSON.stringify ({
+                query: 
+                `
+                query getProductsByRating($rating: String) { 
+                    productsByRating(rating: $rating) {
+                    _id, name, price, description, category, tag, rating, imageName, vendor {name}}}
+                `,
+                variables: {rating: rating}
+            })
+        }).then(res => res.json())
+        .then(data => {
+            setProductsByRating(data.data.productsByRating)
+        })
+    }
+
+
+    return <ProductContext.Provider value={{product, products, productsByCategory, productsByRating, productsByTag, getProduct, getProducts, getProductByTag, getProductsByCategory, getProductsByRating}}>
         {children}
     </ProductContext.Provider>
 }

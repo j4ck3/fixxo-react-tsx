@@ -20,20 +20,21 @@ import { ProductContextType, useProductContext } from '../contexts/ProductContex
 
 const Home: React.FC = () => {
 
-  const {products, getProductByTag, productsByCategory, getProductsByCategory, productsByRating, getProductsByRating} = useProductContext() as ProductContextType
+  const {products, productsByCategory, productsByRating, productsByTag, getProducts, getProductByTag, getProductsByCategory, getProductsByRating} = useProductContext() as ProductContextType
 
   useEffect(() => {
-    getProductByTag(8)
+    getProducts()
+    getProductByTag('featured')
     getProductsByCategory('Bags')
     getProductsByRating('5')
-  }, [])
+  },[])
 
   return (
     <>
       <NavBar />
       <Landing />
       <SaleBanner21 />
-      <ProductModelGird title='Featured Products' />
+      <ProductModelGird title='Featured Products' items={productsByTag}/>
       <SaleBanner11 />
       <ProductActions />
       <BigBannerModel items={productsByCategory} />

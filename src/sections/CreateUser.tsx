@@ -16,7 +16,7 @@ const CreateForm:React.FC = () => {
       const errors = {firstName: '', lastName: '', email: '', password: ''}
       const regex_email = /^(([^<>()[\]\.,;:\s@\"]+(\.[^<>()[\]\.,;:\s@\"]+)*)|(\".+\"))@(([^<>()[\]\.,;:\s@\"]+\.)+[^<>()[\]\.,;:\s@\"]{2,})$/i
       const regex_name = /^[A-Za-z]{1,30}$/
-      const regex_password = /^(?=(.*[a-z]){1,})(?=(.*[A-Z]){1,})(?=(.*[0-9]){1,})(?=(.*[!@#$%^&*()\-__+.]){1,}).{8,}$/
+      const regex_password = /^(?=(.*[a-z]){1,})(?=(.*[A-Z]){1,})(?=(.*[0-9]){1,})(?=(.*[!#$%^&*()\-__+.]){1,}).{8,}$/
   
       //firstName
         if (userRequest.firstName.length <= 1)
@@ -35,7 +35,7 @@ const CreateForm:React.FC = () => {
       
       //password
       if (!regex_password.test(userRequest.password))
-        errors.password = 'Password must be at least 8 characters long & contain one uppercase and lowercase letter, one number & one special charachter (!@#$&*)'
+        errors.password = 'Password must be at least 8 characters long & contain one uppercase and lowercase letter, one number & one special charachter (!#$&*)'
   
       return errors;
     }

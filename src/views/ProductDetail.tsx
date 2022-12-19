@@ -15,22 +15,17 @@ import ProductModelGird from '../sections/Product_model_gird'
 import ReadMore from '../components/ReadMore'
 import DropDown from '../components/DropDown'
 import ProductFormInput from '../components/ProductFormInput'
-import { gql, useQuery } from '@apollo/client'
 
 
-
+//vendor name
 
 const Product:React.FC = () => {
   const id = useParams()
-
-
-
-
-  const {product, getProduct, products, getProductByTag, productgql, getProductgql} = useProductContext() as ProductContextType
+  const {product, getProduct} = useProductContext() as ProductContextType
 
   useEffect(() => {
-    getProductgql(id)
-    getProductByTag(4)
+    let productId = id.articleNumber
+    getProduct(productId)
   }, [])
 
 const [selected, setSelected] = useState<string>('Choose an Option')
@@ -45,13 +40,13 @@ const [selectedTab, setSelectedTab] = useTabs([
     <>
     <NavBar />
     <SaleNote />
-    <BreadCrumb currentPage={productgql.name} />
+    <BreadCrumb currentPage={product.name} />
 
     <div className="container-xxl">
     <div className="row mt-5 product-container">
         <div className="col-md-6">
             <div className="images">
-                <div className="text-center mb-4"><img id="main-image" src={productgql.imageName} alt="product" /></div>
+                <div className="text-center mb-4"><img id="main-image" src={product.imageName} alt="product" /></div>
                     <div className="text-center"> <img className="sec-image" src={product_img_1} alt="product" />
                                                   <img className="sec-image" src={product_img_2} alt="product" />
                     </div>
@@ -59,8 +54,8 @@ const [selectedTab, setSelectedTab] = useTabs([
         </div>
         <div className='col'>
         <div className="col-2 w-100">
-            <h1>{productgql.name}</h1>
-            <h3 className="text-uppercase">{productgql.category}</h3>
+            <h1>{product.name}</h1>
+            <h3 className="text-uppercase">{product.category}</h3>
             <div className="product-rating mt-3">
                 <i className="fa-solid fa-star"></i>
                 <i className="fa-solid fa-star"></i>
@@ -68,17 +63,10 @@ const [selectedTab, setSelectedTab] = useTabs([
                 <i className="fa-solid fa-star"></i>
                 <i className="fa-solid fa-star"></i>
             </div>
-            <h4 className="mt-3">${productgql.price}</h4>
+            <h4 className="mt-3">${product.price}</h4>
 
             <ReadMore>
-            Discovered had get considered projection who favourable. 
-            Necessary up knowledge it tolerably. Unwilling departure education 
-            is be dashwoods or an. Use off agreeable law unwilling sir 
-            deficient curiosity instantly. Lorem enim ligula
-            venenatis dolor. Maecenas nisl est, ultrices nec congue eget, auctor vitae massa. Fusce luctus 
-            vestibulum augue ut aliquet. Nunc sagittis dictum nisi, sed ullamcorper ipsum dignissim ac. In at 
-            libero sed nunc venenatis imperdiet sed ornare turpis. Donec vitae dui eget tellus gravida venenatis. 
-            Integer fringilla congue eros non fermentum. Sed dapibus.
+              {product.description}
             </ReadMore>
 
                 <div className="product-input-container">
@@ -107,7 +95,7 @@ const [selectedTab, setSelectedTab] = useTabs([
                 </div>
 
 
-                <ProductFormInput form_count={0} item={product} />
+                <ProductFormInput form_count={1} item={product} />
                 
                 <div className="product-input-container">
                     <label className="label-product">Share:</label>
@@ -165,7 +153,7 @@ const [selectedTab, setSelectedTab] = useTabs([
 </div>
 
 
-    <ProductModelGird title="Featured Products"/>
+{/*     <ProductModelGird title="Featured Products"/> */}
 
 
 
