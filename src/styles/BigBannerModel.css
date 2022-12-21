@@ -5,6 +5,7 @@
     gap: 1rem;
     margin: 4rem 0;
     overflow: hidden;
+    padding: 3rem 0;
 }
 
 .sec-grid-big { grid-area: 1 / 1 / 2 / 2; }

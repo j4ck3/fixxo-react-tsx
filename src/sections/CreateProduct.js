@@ -42,15 +42,15 @@ const CreateProductForm = () => {
     }
   return (
     <>
-          <div className='container'>
+      <div className='container'>
         <div className='row'>
           <form onSubmit={handleSubmit}>
             <h5>Add a product</h5>
-            <input type="text" value={product.name} onChange={(e) => setProduct({...product, name: e.target.value} )} className='form-control mb-3' placeholder='Name' />
-            <input type="text" value={product.price} onChange={(e) => setProduct({...product, price: e.target.value} )} className='form-control mb-3' placeholder='Price' />
-            <input type="text" value={product.tag} onChange={(e) => setProduct({...product, tag: e.target.value} )} className='form-control mb-3' placeholder='Tag' />
-            <select type="text" value={product.category} onChange={(e) => setProduct({...product, category: e.target.value} )} className='form-control mb-3'>
-            <option value='0' disabled selected >Choose a Category</option>
+            <input type="text" required value={product.name} onChange={(e) => setProduct({...product, name: e.target.value} )} className='form-control mb-3' placeholder='Name' />
+            <input type="text" required value={product.price} onChange={(e) => setProduct({...product, price: e.target.value} )} className='form-control mb-3' placeholder='Price' />
+            <input type="text" required value={product.tag} onChange={(e) => setProduct({...product, tag: e.target.value} )} className='form-control mb-3' placeholder='Tag' />
+            <select type="text" required value={product.category} onChange={(e) => setProduct({...product, category: e.target.value} )} className='form-select mb-3'>
+            <option value='0' defaultChecked disabled>Choose a Category</option>
             <option value='Shoes'>Shoes</option>
             <option value='Shirts'>T-Shirts</option>
             <option value='Pants'>Pants</option>

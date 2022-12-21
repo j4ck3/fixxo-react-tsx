@@ -2,9 +2,10 @@ import React, {useState} from 'react'
 
 interface Props {
     children: any
+    max: number
 }
 
-const ReadMore:React.FC<Props> = ({ children }) => {
+const ReadMore:React.FC<Props> = ({ children, max }) => {
     
 
 
@@ -18,8 +19,8 @@ const toggleText = () => {
 
   return (
     <p>
-        {readMore ? children : children.substr(0, 294) }  
-        (<button onClick={toggleText} className="readmore-btn">{ readMore ? 'Read Less' : 'Read More'}</button>)
+        {readMore ? children : children.substr(0, max) }
+        (<button type='button' onClick={toggleText} className="readmore-btn">{ readMore ? 'Read Less' : 'Read More'}</button>)
     </p>
   )
 }

@@ -46,9 +46,9 @@ const [selectedTab, setSelectedTab] = useTabs([
     <div className="row mt-5 product-container">
         <div className="col-md-6">
             <div className="images">
-                <div className="text-center mb-4"><img id="main-image" src={product.imageName} alt="product" /></div>
-                    <div className="text-center"> <img className="sec-image" src={product_img_1} alt="product" />
-                                                  <img className="sec-image" src={product_img_2} alt="product" />
+                <div className="text-center mb-4"><img id="main-image" src={product.imageName} alt={product.name}/></div>
+                    <div className="text-center"> <img className="sec-image" src={product_img_1} alt={product.name} />
+                                                  <img className="sec-image" src={product_img_2} alt={product.name} />
                     </div>
             </div>
         </div>
@@ -65,7 +65,7 @@ const [selectedTab, setSelectedTab] = useTabs([
             </div>
             <h4 className="mt-3">${product.price}</h4>
 
-            <ReadMore>
+            <ReadMore max={270}>
               {product.description}
             </ReadMore>
 

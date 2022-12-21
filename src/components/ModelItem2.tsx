@@ -1,26 +1,39 @@
 import React from 'react'
+import { NavLink } from 'react-router-dom'
+import { ShoppingCartContextType, useShoppingCartContext } from '../contexts/ShoppingCartContext'
+import { ProductItem } from '../models/ProductModels'
+
+interface Props {
+    item: any
+}
 
 
-const model_item2:React.FC = () => {
+const model_item2:React.FC<Props> = ({item}) => {
+
+const { incrementQuantity } = useShoppingCartContext() as ShoppingCartContextType
   return (
     <>
-        <div className='category-grid-item w-100'>
-            <div className="category-grid-body">
-                <ul className="model-item-menu">
-                    <li><button title='add to wishlist'><i className="fa-solid fa-heart"></i></button></li>
-                    <li><button title='compare this item'><i className="fa-solid fa-shuffle"></i></button></li>
-                    <li><button title='add to cart'><i className="fa-solid fa-cart-shopping"></i></button></li>
-                </ul>
-                <a className="model-item-btn" href="#">quick view</a>
-            </div>
-            <div className="model-item-info">
-                <h4>Category</h4>
-                <h3>Modern Black Blouse</h3>
+        <div className='card'>
+            <div className='category-grid-item w-100 mb-4'>
+                <div className="category-grid-body">
+                <img className='model-item-img' src={item.imageName} alt={item.name} />
+                    <ul className="model-item-menu">
+                        <li><button type='button' title='add to wishlist'><i className="fa-solid fa-heart"></i></button></li>
+                        <li><button type='button' title='compare this item'><i className="fa-solid fa-shuffle"></i></button></li>
+                        <li><button type='button' title='add to Shopping cart' onClick={() => incrementQuantity({articleNumber: item._id, product: item, quantity: 0})}><i className="fa-solid fa-cart-shopping"></i></button></li>
+                    </ul>
+                    <NavLink to={`/products/product/${item._id}`} className="model-item-btn">quick view</NavLink>
+                </div>
+                <div className="model-item-info">
+                <h4>{item.category}</h4>
+                <h3>{item.name}</h3>
                 <i className="fa-solid fa-star"></i>
                 <i className="fa-solid fa-star"></i>
                 <i className="fa-solid fa-star"></i>
                 <i className="fa-solid fa-star"></i>
-                <p>$40</p>
+                <i className="fa-solid fa-star"></i>
+                <p>${item.price}</p>
+                </div>
             </div>
         </div>
     </>

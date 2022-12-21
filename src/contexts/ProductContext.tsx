@@ -16,6 +16,7 @@ export interface ProductContextType {
     getProductsByCategory: (category?: string) => void;
     getProductsByRating: (rating?: string) => void;
     getProductByTag: (tag?: string) => void
+    deleteProduct: (productId?: any) => void
 }
 
 export const ProductContext = createContext<ProductContextType | null>(null)
@@ -41,9 +42,7 @@ export const ProductProvider: React.FC<Props> = ({children}) => {
                     product (id: $id) { _id, name, price, description, category, tag, rating, imageName, vendor {name}}
                   }
                 `,
-                variables: {
-                    id: prodcutId
-                }
+                variables: { id: prodcutId }
             })
         }).then(res => res.json())
         .then(data => {
@@ -57,8 +56,7 @@ export const ProductProvider: React.FC<Props> = ({children}) => {
             method: 'POST',
             headers: { "content-type": "application/json"},
             body: JSON.stringify ({
-            query: 
-            `
+            query: `
             { products { _id, name, price, tag, category, description, rating, imageName, vendor {name}}}
             `
             })
@@ -73,8 +71,7 @@ export const ProductProvider: React.FC<Props> = ({children}) => {
             method: 'POST',
             headers: { "content-type": "application/json"},
             body: JSON.stringify ({
-                query: 
-                `
+                query: `
                 query getProductsByTag($tag: String) { 
                     productsByTag(tag: $tag) {
                     _id, name, price, description, category, tag, rating, imageName, vendor {name}}}
@@ -93,8 +90,7 @@ export const ProductProvider: React.FC<Props> = ({children}) => {
             method: 'POST',
             headers: { "content-type": "application/json"},
             body: JSON.stringify ({
-                query: 
-                `
+                query: `
                 query getProductsByCategory($category: String) { 
                     productsByCategory(category: $category) {
                     _id, name, price, description, category, tag, rating, imageName, vendor {name}}}
@@ -112,8 +108,7 @@ export const ProductProvider: React.FC<Props> = ({children}) => {
             method: 'POST',
             headers: { "content-type": "application/json"},
             body: JSON.stringify ({
-                query: 
-                `
+                query: `
                 query getProductsByRating($rating: String) { 
                     productsByRating(rating: $rating) {
                     _id, name, price, description, category, tag, rating, imageName, vendor {name}}}
@@ -126,9 +121,27 @@ export const ProductProvider: React.FC<Props> = ({children}) => {
         })
     }
 
+    const deleteProduct = async (prodcutId: String) => {
+        await fetch(baseUrl, {
+            method: 'POST',
+            headers: { "content-type": "application/json"},
+            body: JSON.stringify ({
+                query: `
+                mutation deleteProductById( $id: ID){
+                    deleteProduct(id: $id) {_id, name, price, description, category, tag, rating, imageName, vendor {name}}
+                }
+                `,
+                variables: { id: prodcutId }
+            })
+        }).then(res => res.json())
+    }
 
-    return <ProductContext.Provider value={{product, products, productsByCategory, productsByRating, productsByTag, getProduct, getProducts, getProductByTag, getProductsByCategory, getProductsByRating}}>
-        {children}
+
+    return <ProductContext.Provider 
+    value={{product, products, productsByCategory, productsByRating, productsByTag, 
+    getProduct, getProducts, getProductByTag, getProductsByCategory, getProductsByRating, deleteProduct
+    }}>
+    {children}
     </ProductContext.Provider>
 }
 export default ProductProvider

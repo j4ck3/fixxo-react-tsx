@@ -109,7 +109,8 @@
         width: 50px;
         height: 41px;
         display: flex;
-        border: solid 1px #000;
+        border-right: 1px solid;
+        border-left: 1px solid;
         text-align: center;
         justify-content: center;
         align-items: center;
@@ -135,12 +136,10 @@
         }
 
     .spinner-button {
-        font-size: 16;
+        font-size: 32px;
         position: absolute;
         z-index: 2;
-        width: 14.5px;
         text-align: center;
-        margin: 0px;
         height: 10px;
         line-height: 10px;
         cursor: pointer;
@@ -149,8 +148,8 @@
     }
   
         #inc-button {
-            right: 13px;
-            top: 15px;
+            right: 9px;
+            top: 16px;
         }
         
         #dec-button {
@@ -211,4 +210,19 @@
             font-weight: var(--font-weight-bold);
             font-size: 20px;
             margin-top: 5rem;
+        }
+        .product-table-img {
+            max-width: 50px;
+            height: auto;
+            border-radius: 5px;
+        }
+        .prodcut-table-btn {
+            background-color: black;
+            border-radius: 50px;
+            width: 40px;
+            height: 25px;
+            font-size: 15px;
+            border: none;
+            color: var(--color-theme);
+            transition: .09s;
         }

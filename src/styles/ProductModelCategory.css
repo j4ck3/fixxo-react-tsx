@@ -9,9 +9,6 @@
     .category-header {
         font-size: 20px;
         font-weight: var(--font-weight-bold);
-        display: flex;
-        align-items: flex-end;
-        margin-bottom: 1rem;
     }
     
     .cetegory-header-1 { grid-area: 1 / 1 / 2 / 2; }

@@ -20,7 +20,7 @@ import { ProductContextType, useProductContext } from '../contexts/ProductContex
 
 const Home: React.FC = () => {
 
-  const {products, productsByCategory, productsByRating, productsByTag, getProducts, getProductByTag, getProductsByCategory, getProductsByRating} = useProductContext() as ProductContextType
+  const { products, productsByCategory, productsByRating, productsByTag, getProducts, getProductByTag, getProductsByCategory, getProductsByRating } = useProductContext() as ProductContextType
 
   useEffect(() => {
     getProducts()
@@ -40,7 +40,7 @@ const Home: React.FC = () => {
       <BigBannerModel items={productsByCategory} />
       <BigBannerModelMirror items={productsByRating} />
       <SaleBanner1 />
-      <ProductModelCategory />
+      <ProductModelCategory items={products}/>
       <SalesPoint />
       <Footer />
     </>
