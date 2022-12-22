@@ -8,8 +8,8 @@ const productTable = ({items}) => {
 const { deleteProduct } = useProductContext()
   return (
     <>
-    <div className='container mb-5'>
-        <table>
+    <div className='container mb-5 '>
+        <table className='w-100'>
             <thead>
                 <tr>
                     <th className='mr-4'>Image</th>

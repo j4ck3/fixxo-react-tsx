@@ -2,7 +2,7 @@ import React from 'react'
 import { NavLink } from 'react-router-dom'
 import { ShoppingCartContextType, useShoppingCartContext } from '../contexts/ShoppingCartContext'
 import { ProductItem } from '../models/ProductModels'
-
+import Rating from './Rating'
 
 
 
@@ -28,11 +28,7 @@ const { incrementQuantity } = useShoppingCartContext()
                 <div className="model-item-info">
                     <h4>{item.category}</h4>
                     <h3>{item.name}</h3>
-                    <i className="fa-solid fa-star"></i>
-                    <i className="fa-solid fa-star"></i>
-                    <i className="fa-solid fa-star"></i>
-                    <i className="fa-solid fa-star"></i>
-                    <i className="fa-solid fa-star"></i>
+                    <Rating N={item.rating} />
                     <p>${item.price}</p>
                 </div>
             </div>

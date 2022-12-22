@@ -1,6 +1,6 @@
+import { gql, useMutation } from '@apollo/client';
 import { useContext, createContext, useState} from 'react'
 import { ProductItem } from '../models/ProductModels';
-
 interface Props {
     children: any;
 }
@@ -13,6 +13,7 @@ export interface ProductContextType {
     productsByTag: ProductItem[]
     getProduct: (productId?: any) => void
     getProducts: () => void;
+    createProduct: (product: any) => void;
     getProductsByCategory: (category?: string) => void;
     getProductsByRating: (rating?: string) => void;
     getProductByTag: (tag?: string) => void
@@ -23,7 +24,7 @@ export const ProductContext = createContext<ProductContextType | null>(null)
 export const useProductContext = () => { return useContext(ProductContext) }
 
 export const ProductProvider: React.FC<Props> = ({children}) => {
-    const EMPTY_PRODUCT_ITEM: ProductItem = {articleNumber: '', tag: '', name: '', category: '', description: '', price: '', rating: '', imageName: '', vendorId: '', item: null}
+    const EMPTY_PRODUCT_ITEM: ProductItem = {articleNumber: '', tag: '', name: '', category: '', description: '', price: '', rating: '', imageName: '', vendorId: '', item: null, _id: ''}
     const baseUrl:string = 'http://localhost:5000/graphql'
     const [product, setProduct] = useState<ProductItem>(EMPTY_PRODUCT_ITEM)
     const [products, setProducts] = useState<ProductItem[]>([])
@@ -64,6 +65,24 @@ export const ProductProvider: React.FC<Props> = ({children}) => {
         .then(data => {
             setProducts(data.data.products)
         })
+    }
+
+
+    const createProduct = async (product: any) => {
+        await fetch(baseUrl, {
+            method: 'POST',
+            headers: { "content-type": "application/json"},
+            body: JSON.stringify ({
+            query: `
+            mutation addProduct($name: String!, $price: String!, $tag: String!, $rating: String!, $category: String!, $description: String!, $imageName: String, $vendorId: ID!) {
+                addProduct(name: $name, price: $price, tag: $tag, rating: $rating, category: $category, description: $description, imageName: $imageName, vendorId: $vendorId) {
+                  name
+                }
+              }
+            `,
+            variables: product
+            })
+        }).then(res => res.json())
     }
 
     const getProductByTag = async ( tag = '') => {
@@ -121,7 +140,8 @@ export const ProductProvider: React.FC<Props> = ({children}) => {
         })
     }
 
-    const deleteProduct = async (prodcutId: String) => {
+
+    const deleteProduct = async ( prodcutId: String) => {
         await fetch(baseUrl, {
             method: 'POST',
             headers: { "content-type": "application/json"},
@@ -139,7 +159,7 @@ export const ProductProvider: React.FC<Props> = ({children}) => {
 
     return <ProductContext.Provider 
     value={{product, products, productsByCategory, productsByRating, productsByTag, 
-    getProduct, getProducts, getProductByTag, getProductsByCategory, getProductsByRating, deleteProduct
+    getProduct, createProduct, getProducts, getProductByTag, getProductsByCategory, getProductsByRating, deleteProduct
     }}>
     {children}
     </ProductContext.Provider>

@@ -2,14 +2,13 @@ import React from 'react'
 import { NavLink } from 'react-router-dom'
 import { ShoppingCartContextType, useShoppingCartContext } from '../contexts/ShoppingCartContext'
 import { ProductItem } from '../models/ProductModels'
-
+import Rating from './Rating'
 interface Props {
     item: any
 }
 
 
 const model_item2:React.FC<Props> = ({item}) => {
-
 const { incrementQuantity } = useShoppingCartContext() as ShoppingCartContextType
   return (
     <>
@@ -24,14 +23,12 @@ const { incrementQuantity } = useShoppingCartContext() as ShoppingCartContextTyp
                     </ul>
                     <NavLink to={`/products/product/${item._id}`} className="model-item-btn">quick view</NavLink>
                 </div>
+                
                 <div className="model-item-info">
                 <h4>{item.category}</h4>
                 <h3>{item.name}</h3>
-                <i className="fa-solid fa-star"></i>
-                <i className="fa-solid fa-star"></i>
-                <i className="fa-solid fa-star"></i>
-                <i className="fa-solid fa-star"></i>
-                <i className="fa-solid fa-star"></i>
+
+                <Rating N={item.rating} />
                 <p>${item.price}</p>
                 </div>
             </div>

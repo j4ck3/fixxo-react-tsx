@@ -1,37 +1,20 @@
 import React, { useState } from 'react'
 import { useQuery, useMutation, gql } from '@apollo/client'
 
-//Du ska ha minst ett enkelt enhetstest.
-//Du ska ha minst ett enkelt enhetstest.
-//Du ska ha minst ett enkelt enhetstest.
-//Du ska ha minst ett enkelt enhetstest.
-//Du ska ha minst ett enkelt enhetstest.
-//Du ska ha minst ett enkelt enhetstest.
-//Du ska ha minst ett enkelt enhetstest.
-//Du ska ha minst ett enkelt enhetstest.
-//Du ska ha minst ett enkelt enhetstest.
-
-
+import { useProductContext } from '../contexts/ProductContext'
 
 const GET_VENDORS_QUERY = gql`{ vendors { _id, name}}`
-const POST_PRODUCT_QUERY = gql
-`
-mutation addProduct($name: String!, $price: String!, $tag: String!, $rating: String!, $category: String!, $description: String!, $imageName: String, $vendorId: ID!) {
-  addProduct(name: $name, price: $price, tag: $tag, rating: $rating, category: $category, description: $description, imageName: $imageName, vendorId: $vendorId) {
-    name
-  }
-}
-`
+
 
 const CreateProductForm = () => {
+  const { createProduct } = useProductContext()
     const defualt_values = {name: '', price: '', category: '', tag: '', rating: '', description: '', imageName: '', vendorId: '0'}
-    const [ product, setProduct ] = useState(defualt_values)
+    const [product, setProduct] = useState(defualt_values)
     const { loading, error, data } = useQuery(GET_VENDORS_QUERY)
-    const [ addProduct ] = useMutation(POST_PRODUCT_QUERY)
 
     const handleSubmit = (e) => {
         e.preventDefault()
-        addProduct({variables: product})
+        createProduct(product)
         setProduct(defualt_values)
       } 
   
@@ -49,8 +32,7 @@ const CreateProductForm = () => {
             <input type="text" required value={product.name} onChange={(e) => setProduct({...product, name: e.target.value} )} className='form-control mb-3' placeholder='Name' />
             <input type="text" required value={product.price} onChange={(e) => setProduct({...product, price: e.target.value} )} className='form-control mb-3' placeholder='Price' />
             <input type="text" required value={product.tag} onChange={(e) => setProduct({...product, tag: e.target.value} )} className='form-control mb-3' placeholder='Tag' />
-            <select type="text" required value={product.category} onChange={(e) => setProduct({...product, category: e.target.value} )} className='form-select mb-3'>
-            <option value='0' defaultChecked disabled>Choose a Category</option>
+            <select required value={product.category} onChange={(e) => setProduct({...product, category: e.target.value} )} className='form-select mb-3'>
             <option value='Shoes'>Shoes</option>
             <option value='Shirts'>T-Shirts</option>
             <option value='Pants'>Pants</option>

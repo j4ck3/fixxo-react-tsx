@@ -1,31 +1,31 @@
 import React, {useState, useContext, createContext} from 'react'
-/* import { Params } from 'react-router-dom' */
 import { User, UserRequest, UserSignIn} from '../models/UserModels'
 import { UserProviderProps } from '../models/UserProviderPropsModels'
 
-
 export interface IUserContext {
     user: User
-    setUser: React.Dispatch<React.SetStateAction<User>>
-    userRequest: UserRequest
-    userSignIn: UserSignIn
-    setUserRequest: React.Dispatch<React.SetStateAction<UserRequest>>
-    setUserSignIn: React.Dispatch<React.SetStateAction<UserSignIn>>
     users: User[]
-    signUp: (e: React.FormEvent) => void
-    signIn: (e: React.FormEvent) => void
+    setUser: React.Dispatch<React.SetStateAction<User>>
     get: (id: String) => void
     getAll: () => void
     update: (e: React.FormEvent) => void
     remove: (id: String) => void
+
+    signUp: (e: React.FormEvent) => void
+    signIn: (e: React.FormEvent) => void
+    userRequest: UserRequest
+    userSignIn: UserSignIn
+    setUserRequest: React.Dispatch<React.SetStateAction<UserRequest>>
+    setUserSignIn: React.Dispatch<React.SetStateAction<UserSignIn>>
 }
 
 export const UserContext = createContext<IUserContext | null>(null)
 export const useUserContext = () => { return useContext(UserContext)}
 
 const UserProvider = ({children} : UserProviderProps) => {
-    const baseUrl = 'http://localhost:5000/api/authentication'
-    const defaultUserValues: User = {id: '', firstName: '', lastName: '', email: ''}
+    const authUrl = 'http://localhost:5000/api/authentication'
+    const userUrl = 'http://localhost:5000/api/users'
+    const defaultUserValues: User = {_id: '', firstName: '', lastName: '', email: ''}
     const defaultUserRequestValues: UserRequest = {firstName: '', lastName: '', email: '', password: ''}
     const defualtSignInValues: UserSignIn = {email: '', password: ''}
 
@@ -38,7 +38,7 @@ const UserProvider = ({children} : UserProviderProps) => {
 
     const signUp = async (e: React.FormEvent) => {
         e.preventDefault()
-        const result = await fetch(`${baseUrl}/signup`, { 
+        const result = await fetch(`${authUrl}/signup`, { 
             method: 'POST',
             headers: {
                 'Content-Type': `application/json`
@@ -52,46 +52,62 @@ const UserProvider = ({children} : UserProviderProps) => {
 
     const signIn = async (e: React.FormEvent) => {
         e.preventDefault()
-        const result = await fetch(`${baseUrl}/signin`, { 
+        const result = await fetch(`${authUrl}/signin`, { 
             method: 'POST',
             headers: {
                 'Content-Type': `application/json`
-            } ,
+            },
             body: JSON.stringify(userSignIn)
+            
         })
-        if (result.status === 201) {
-            setUserSignIn(defualtSignInValues)    
+        if (result.status === 200) {
+            setUserSignIn(defualtSignInValues)
+            const data = await result.json()
+            localStorage.setItem('accessToken', data.accessToken)
         }
     }
 
     const get = async (id: String) => {
-        const result = await fetch(`${baseUrl}/${id}`)
+        const result = await fetch(`${userUrl}/${id}`)
         if (result.status === 200) {
             setUser(await result.json())
         }
     }
+
     const getAll = async () => {
-        const result = await fetch(`${baseUrl}`)
-        if (result.status === 200) {
-            setUsers(await result.json())
+        const res = await fetch(userUrl, { 
+            method: 'GET',
+            headers: {
+                'Content-Type': `application/json`,
+                'authorization': `Bearer ${localStorage.getItem('accessToken')}`
+            }
+        })
+        if (res.status === 200) {
+            setUsers(await res.json())
         }
     }
+
     const update = async (e: React.FormEvent) => {
         e.preventDefault()
-        const result = await fetch(`${baseUrl}/${user.id}`, {
-            method: 'put',
+        const result = await fetch(`${userUrl}/${user._id}`, {
+            method: 'PUT',
             headers: {
-                'Content-Type': `application/json`
-            } ,
+                'Content-Type': `application/json`,
+                'authorization': `Bearer ${localStorage.getItem('accessToken')}`
+            },
             body: JSON.stringify(user)
         })
         if (result.status === 200) {
             setUser(await result.json()) 
         }
     }
+
     const remove = async (id: String) => {
-        const result = await fetch(`${baseUrl}/${id}`, {
+        const result = await fetch(`${userUrl}/${id}`, {
             method: 'DELETE',
+            headers: {
+                'authorization': `Bearer ${localStorage.getItem('accessToken')}`
+            }
         })
         if (result.status === 204) {
             setUser(defaultUserValues) 

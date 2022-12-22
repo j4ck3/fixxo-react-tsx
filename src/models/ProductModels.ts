@@ -1,4 +1,5 @@
 export interface ProductItem {
+    _id: string
     item: any
     articleNumber: any
     tag: string

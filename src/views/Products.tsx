@@ -13,7 +13,7 @@ const Products:React.FC = () => {
 
     useEffect(() =>{
         getProducts()
-    }, [])
+    }, [getProducts])
 
   return (
     <>

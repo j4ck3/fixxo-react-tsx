@@ -18,23 +18,32 @@ const UserList:React.FC = () => {
         get(id)
     }
 
+    const notSignedInMSG = () => {
+        if (users.length === 0)
+        return  <div className='alert alert-alert ' role='alert'>
+                <h2 className='text-center'>Login to see a list of users</h2>
+                </div>
+    }
     return (
         <div className='container-sm'>
             <h3 className='text-center'>List Of Users<i className="fa-solid fa-users"></i></h3>
+            {notSignedInMSG()}
             {
-                users.map((user: User) => (
+                users.map((user: User) => (  
+                <div className='my-3 w-100'>{user.firstName} {user.lastName} {user.email}
 
-                <div key={user.id.toString()} className='my-3 w-100'>{user.id} {user.firstName} {user.lastName} {user.email}
                     <div className='d-inline-block'>
-                        <button className='border-0 rounded' onClick={() => removeUser(user.id)}><i className="fa-solid fa-trash"></i></button>
-                        <button className='border-0 rounded' onClick={() => get(user.id)}><i className="fa-solid fa-user"></i></button>
+                        <button type='button' title={`Remove User ${user.firstName}`} className='border-0 rounded' onClick={() => removeUser(user._id)}><i className="fa-solid fa-trash"></i></button>
+                        <button type='button' title='Edit User' className='border-0 rounded' onClick={() => getUser(user._id)}><i className="fa-solid fa-edit"></i></button>
                     </div>
                 </div>
-                
-                ))
+                ))  
             }
         </div>
+        
   )
+
 }
 
 export default UserList
+

@@ -30,13 +30,13 @@ const NavBar:React.FC = () => {
                         <li><NavLink to='/categories' end>Categories</NavLink></li>
                         <li><NavLink to='/products' end>Products</NavLink></li>
                         <li><NavLink to='/contact' end>Contact</NavLink></li>
-                        <li><NavLink to='/users' end>Users</NavLink></li>
+                        <li><NavLink to='/users' end>Account</NavLink></li>
                     </ul>
                     <div className='meny-button d-flex'>
                         <MenuAction linkAdress='/' faIcon='fa-solid fa-search'  />
                         <MenuAction linkAdress='/compare' faIcon='fa-solid fa-shuffle' />
                         <MenuAction linkAdress='/wishlist' faIcon='fa-solid fa-heart' qty={0} />
-                        <button title='shopping-cart' className='meny-button-cart position-relative' type='button' data-bs-toggle='offcanvas' data-bs-target='#shoppingCart' aria-controls='shoppingCart'>
+                        <button type='button' title='shopping-cart' className='meny-button-cart position-relative' data-bs-toggle='offcanvas' data-bs-target='#shoppingCart' aria-controls='shoppingCart'>
                             <i className='fa-solid fa-bag-shopping'></i>
                             <span id="counter-1">{cartQuantity}</span>
                             <ShoppingCart />

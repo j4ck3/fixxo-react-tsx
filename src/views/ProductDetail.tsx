@@ -15,17 +15,20 @@ import ProductModelGird from '../sections/Product_model_gird'
 import ReadMore from '../components/ReadMore'
 import DropDown from '../components/DropDown'
 import ProductFormInput from '../components/ProductFormInput'
+import Rating from '../components/Rating'
 
 
 //vendor name
 
 const Product:React.FC = () => {
   const id = useParams()
-  const {product, getProduct} = useProductContext() as ProductContextType
+  const {product, getProduct, productsByCategory, getProductsByCategory} = useProductContext() as ProductContextType
 
   useEffect(() => {
+    let category = product.category
     let productId = id.articleNumber
     getProduct(productId)
+    getProductsByCategory(category)
   }, [])
 
 const [selected, setSelected] = useState<string>('Choose an Option')
@@ -57,11 +60,7 @@ const [selectedTab, setSelectedTab] = useTabs([
             <h1>{product.name}</h1>
             <h3 className="text-uppercase">{product.category}</h3>
             <div className="product-rating mt-3">
-                <i className="fa-solid fa-star"></i>
-                <i className="fa-solid fa-star"></i>
-                <i className="fa-solid fa-star"></i>
-                <i className="fa-solid fa-star"></i>
-                <i className="fa-solid fa-star"></i>
+                  <Rating N={product.rating} />
             </div>
             <h4 className="mt-3">${product.price}</h4>
 
@@ -151,11 +150,7 @@ const [selectedTab, setSelectedTab] = useTabs([
         <TabPanel hidden={selectedTab !== "Reviews"}>Reviews</TabPanel>
       </div>
 </div>
-
-
-{/*     <ProductModelGird title="Featured Products"/> */}
-
-
+    <ProductModelGird title="Related Products" items={productsByCategory}/>
 
     </>
   )
