@@ -18,16 +18,15 @@ const UserList:React.FC = () => {
         get(id)
     }
 
-    const notSignedInMSG = () => {
+/*     const notSignedInMSG = () => {
         if (users.length === 0)
-        return  <div className='alert alert-alert ' role='alert'>
-                <h2 className='text-center'>Login to see a list of users</h2>
-                </div>
-    }
+        return <h2 className='text-center'>Login to see a list of users</h2>
+    } */
+
     return (
         <div className='container-sm'>
-            <h3 className='text-center'>List Of Users<i className="fa-solid fa-users"></i></h3>
-            {notSignedInMSG()}
+            <h3 className='text-center my-5'>List Of Users<i className="fa-solid fa-users"></i></h3>
+{/*             {notSignedInMSG()} */}
             {
                 users.map((user: User) => (  
                 <div className='my-3 w-100'>{user.firstName} {user.lastName} {user.email}

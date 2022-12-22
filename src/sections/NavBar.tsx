@@ -41,6 +41,8 @@ const NavBar:React.FC = () => {
                             <span id="counter-1">{cartQuantity}</span>
                             <ShoppingCart />
                         </button>
+  
+
    
                     </div>
                     <div onClick={toggleMenu} className='meny-btn'>

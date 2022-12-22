@@ -1,0 +1,44 @@
+.account-form{
+    width: 500px;
+
+    h2 {
+        font-size: 16px;
+        font-weight: 700;
+    }
+    input {
+        width: 100%;
+        padding: 10px 5px;
+        border: 1px solid $color-gray-3;
+        margin-top: 20px;
+
+        &:focus {
+            outline: none;
+            border: 1px solid rgb(71, 71, 71);
+        }
+    }
+
+    .account-btn {
+        background-color: $color-theme;
+        font-size: $font-size-16;
+        color: white;
+        text-transform: uppercase;
+        text-decoration: none;
+        font-weight: 500;
+        padding: 10px 20px;
+        transition: all .2s;
+        border-radius: 0!important;
+        border: none;
+        width: 100%;
+    }
+
+    .error {
+        border: 1px solid rgb(255, 0, 0);
+    }
+
+    .error-message {
+        color: $color-theme;
+        font-size: 0.8rem;
+    }
+}
+
+

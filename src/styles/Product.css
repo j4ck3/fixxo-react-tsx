@@ -75,13 +75,6 @@
             color: var(--color-theme);
         }
 
-            .product-container form select, input {
-                font-size: var(--font-size-16);
-                border: 1px solid black;
-                color: #616365;
-                padding: .5rem;
-                background-color: transparent;
-            }
 
 .product-input-size {
     list-style: none;

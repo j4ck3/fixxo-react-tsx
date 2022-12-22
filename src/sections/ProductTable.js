@@ -2,13 +2,12 @@ import React from 'react'
 import ReadMore from '../components/ReadMore'
 import { useProductContext } from '../contexts/ProductContext'
 
-
-
-const productTable = ({items}) => {
+const ProductTable = ({items}) => {
 const { deleteProduct } = useProductContext()
+
   return (
     <>
-    <div className='container mb-5 '>
+    <div className='container'>
         <table className='w-100'>
             <thead>
                 <tr>
@@ -41,4 +40,4 @@ const { deleteProduct } = useProductContext()
   )
 }
 
-export default productTable
+export default ProductTable

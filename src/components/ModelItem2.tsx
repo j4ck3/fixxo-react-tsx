@@ -1,7 +1,6 @@
 import React from 'react'
 import { NavLink } from 'react-router-dom'
 import { ShoppingCartContextType, useShoppingCartContext } from '../contexts/ShoppingCartContext'
-import { ProductItem } from '../models/ProductModels'
 import Rating from './Rating'
 interface Props {
     item: any

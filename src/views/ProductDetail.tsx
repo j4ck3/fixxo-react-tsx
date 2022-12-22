@@ -17,9 +17,6 @@ import DropDown from '../components/DropDown'
 import ProductFormInput from '../components/ProductFormInput'
 import Rating from '../components/Rating'
 
-
-//vendor name
-
 const Product:React.FC = () => {
   const id = useParams()
   const {product, getProduct, productsByCategory, getProductsByCategory} = useProductContext() as ProductContextType
