@@ -10,13 +10,13 @@ const CreateForm:React.FC = () => {
 <div className='container d-flex justify-content-between w-100 mt-5'>
   <form onSubmit={signUp} className='account-form'>
       <h2>Sign Up</h2>
-      <input className={`${ formErrors.firstName ? "error" : ""}`} value={signUpForm.firstName} onChange={handleChange} type='text' placeholder='Name' id='firstName'></input>
+      <input required className={`${ formErrors.firstName ? "error" : ""}`} value={signUpForm.firstName} onChange={handleChange} type='text' placeholder='Name' id='firstName'></input>
       <div className='error-message'>{formErrors.firstName}</div>
-      <input className={`${ formErrors.lastName ? "error" : ""}`} value={signUpForm.lastName} onChange={handleChange} type='text' placeholder='Last Name' id='lastName'></input>
+      <input required className={`${ formErrors.lastName ? "error" : ""}`} value={signUpForm.lastName} onChange={handleChange} type='text' placeholder='Last Name' id='lastName'></input>
       <div className='error-message'>{formErrors.lastName}</div>
-      <input className={`${ formErrors.email ? "error" : ""}`} value={signUpForm.email} onChange={handleChange} type='email' placeholder='E-mail' id='email'></input>
+      <input required className={`${ formErrors.email ? "error" : ""}`} value={signUpForm.email} onChange={handleChange} type='email' placeholder='E-mail' id='email'></input>
       <div className='error-message'>{formErrors.email}</div>
-      <input className={`${ formErrors.password ? "error" : ""}`} value={signUpForm.password} onChange={handleChange} type='password' placeholder='Password' id='password'></input>
+      <input required className={`${ formErrors.password ? "error" : ""}`} value={signUpForm.password} onChange={handleChange} type='password' placeholder='Password' id='password'></input>
       <div className='error-message'>{formErrors.password}</div>
       <button className='mt-3 account-btn' type='submit'>Sign Up</button>
   </form>
